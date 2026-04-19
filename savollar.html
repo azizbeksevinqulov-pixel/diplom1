@@ -132,21 +132,55 @@
                 id: 2,
                 name: "Big Data",
                 icon: "📊",
-                questions: Array.from({length: 20}, (_, i) => ({
-                    q: `Big Data bo‘yicha savol ${i+1}`,
-                    options: ["To‘g‘ri javob", "Noto‘g‘ri javob 1", "Noto‘g‘ri javob 2", "Noto‘g‘ri javob 3"],
-                    answer: 0
-                }))
+                questions: [
+                    {q: "Big Data ning 5V tamoyillari qaysilar?", options: ["Volume, Velocity, Variety, Veracity, Value", "4P", "3C", "2A"], answer: 0},
+                    {q: "Hadoop asosan nima uchun ishlatiladi?", options: ["Katta hajmdagi ma'lumotlarni saqlash va qayta ishlash", "Kichik bazalarni boshqarish", "Video montaj", "Grafik dizayn"], answer: 0},
+                    {q: "Apache Spark ning asosiy afzalligi nima?", options: ["Real-time analytics va tez hisoblash", "Faqat saqlash", "Parol himoyasi", "Web-sayt yaratish"], answer: 0},
+                    {q: "NoSQL bazalar nima uchun kerak?", options: ["Strukturasiz katta ma'lumotlar uchun", "Oddiy Excel uchun", "Grafika uchun", "Matematika hisoblash uchun"], answer: 0},
+                    {q: "Data Lake nima?", options: ["Barcha turdagi ma'lumotlar saqlanadigan joy", "Faqat tahlil qilish joyi", "Backup joyi", "Shifrlash joyi"], answer: 0},
+                    {q: "MapReduce nima?", options: ["Katta ma'lumotlarni parallel qayta ishlash usuli", "Oddiy hisoblash", "Grafik chizish", "Parol saqlash"], answer: 0},
+                    {q: "Kafka nima uchun ishlatiladi?", options: ["Real-time data streaming", "Ma'lumot saqlash", "Backup", "Shifrlash"], answer: 0},
+                    {q: "HBase nima?", options: ["NoSQL kolonka bazasi", "RDBMS", "Fayl tizimi", "Grafik bazasi"], answer: 0},
+                    {q: "Spark ning asosiy komponenti nima?", options: ["Spark Core", "Hadoop", "Kafka", "MongoDB"], answer: 0},
+                    {q: "Big Data da Velocity nima?", options: ["Ma'lumotlar tezligi", "Hajmi", "Turli xilligi", "Ishonchliligi"], answer: 0},
+                    {q: "Data Warehouse va Data Lake farqi nima?", options: ["Warehouse - strukturali, Lake - har xil", "Bir xil", "Faqat hajmi farq qiladi", "Faqat tezligi farq qiladi"], answer: 0},
+                    {q: "Pig nima?", options: ["Big Data uchun scripting til", "Ma'lumotlar bazasi", "Grafik vosita", "Parol menejeri"], answer: 0},
+                    {q: "Hive nima?", options: ["SQL-like so'rov tili Hadoop uchun", "NoSQL bazasi", "Real-time tool", "Backup tool"], answer: 0},
+                    {q: "Big Data ning asosiy muammosi nima?", options: ["Hajm, tezlik va turli xillik", "Faqat narx", "Faqat joy", "Faqat tezlik"], answer: 0},
+                    {q: "Zookeeper nima uchun kerak?", options: ["Koordinatsiya va sinxronizatsiya", "Ma'lumot saqlash", "Grafika", "Parol"], answer: 0},
+                    {q: "Flume nima?", options: ["Ma'lumotni Hadoop ga o'tkazish vositasi", "Real-time analytics", "Grafik chizish", "Parol saqlash"], answer: 0},
+                    {q: "Sqoop nima?", options: ["RDBMS dan Hadoop ga ma'lumot ko'chirish", "Real-time tool", "Grafik vosita", "Backup"], answer: 0},
+                    {q: "Big Data da Variety nima?", options: ["Ma'lumotlarning turli formatlari", "Hajmi", "Tezligi", "Ishonchliligi"], answer: 0},
+                    {q: "YARN nima?", options: ["Hadoop ning resurs boshqaruvi", "Ma'lumot saqlash", "Grafik vosita", "Parol"], answer: 0},
+                    {q: "Big Data ning asosiy afzalligi nima?", options: ["Katta hajmdagi ma'lumotlardan chuqur tushuncha olish", "Tezlik", "Narx", "Oddiylik"], answer: 0}
+                ]
             },
             {
                 id: 3,
                 name: "Xorijiy til (Ingliz tili)",
                 icon: "🌍",
-                questions: Array.from({length: 20}, (_, i) => ({
-                    q: `Ingliz tili bo‘yicha savol ${i+1}`,
-                    options: ["To‘g‘ri javob", "Noto‘g‘ri javob 1", "Noto‘g‘ri javob 2", "Noto‘g‘ri javob 3"],
-                    answer: 0
-                }))
+                questions: [
+                    {q: "What is the synonym of 'innovative'?", options: ["Creative", "Old", "Slow", "Boring"], answer: 0},
+                    {q: "Choose the correct sentence:", options: ["I have been studying since morning.", "I am study since morning.", "I study since morning.", "I was study since morning."], answer: 0},
+                    {q: "What does 'algorithm' mean?", options: ["A step-by-step procedure", "A type of virus", "A computer part", "A language"], answer: 0},
+                    {q: "Technical term for 'database'?", options: ["Database", "Datahouse", "Databank", "Datastorage"], answer: 0},
+                    {q: "Complete: 'The system is _____ secure.'", options: ["highly", "high", "highest", "height"], answer: 0},
+                    {q: "What is 'firewall' in IT?", options: ["A security system", "A type of virus", "A programming language", "A storage device"], answer: 0},
+                    {q: "Synonym of 'confidentiality'?", options: ["Privacy", "Speed", "Size", "Color"], answer: 0},
+                    {q: "What does 'encryption' mean?", options: ["Converting data into code", "Deleting data", "Storing data", "Sending data"], answer: 0},
+                    {q: "Choose correct: 'Big Data is _____'", options: ["very large and complex", "very small", "only numbers", "only text"], answer: 0},
+                    {q: "What is 'machine learning'?", options: ["Computers learning from data", "Manual programming", "Hardware repair", "Network setup"], answer: 0},
+                    {q: "What does 'phishing' mean?", options: ["Fraudulent attempt to obtain sensitive information", "A type of fish", "A programming term", "A storage method"], answer: 0},
+                    {q: "Complete: 'The data is highly _____.'", options: ["confidential", "visible", "loud", "slow"], answer: 0},
+                    {q: "What is 'backup'?", options: ["Copy of data for recovery", "Deleting data", "Sending data", "Editing data"], answer: 0},
+                    {q: "What does 'velocity' mean in Big Data?", options: ["Speed of data generation", "Size of data", "Type of data", "Color of data"], answer: 0},
+                    {q: "What is 'GDPR'?", options: ["General Data Protection Regulation", "General Data Processing Rule", "Global Data Protection", "General Database Rule"], answer: 0},
+                    {q: "What does 'ransomware' do?", options: ["Encrypts files and demands ransom", "Deletes files", "Sends spam", "Speeds up computer"], answer: 0},
+                    {q: "What is 'VPN' used for?", options: ["Secure private connection", "Faster internet", "Storing files", "Editing photos"], answer: 0},
+                    {q: "What does 'SQL' stand for?", options: ["Structured Query Language", "Simple Query Language", "System Query Language", "Secure Query Language"], answer: 0},
+                    {q: "What is 'cloud computing'?", options: ["Delivering computing services over the internet", "Local computing", "Hardware manufacturing", "Software testing"], answer: 0},
+                    {q: "What does 'AI' stand for?", options: ["Artificial Intelligence", "Advanced Internet", "Automated Interface", "Active Integration"], answer: 0}
+                ]
             }
         ];
 
