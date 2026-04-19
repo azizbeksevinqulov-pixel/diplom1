@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTSU • Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        * { font-family: 'Inter', system_ui, sans-serif; }
+        .title-font { font-family: 'Space Grotesk', sans-serif; }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(28px);
+            border: 1px solid rgba(103, 232, 249, 0.3);
+        }
+
+        .sidebar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-950 to-black text-slate-200 flex min-h-screen">
+
+    <!-- Sidebar -->
+    <div class="sidebar w-72 min-h-screen p-6 border-r border-slate-700 flex flex-col">
+        <div class="flex items-center gap-3 mb-12">
+            <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-2xl flex items-center justify-center text-2xl">📘</div>
+            <div class="title-font text-3xl font-bold">INSTSU</div>
+        </div>
+
+        <div class="space-y-2 flex-1">
+            <a href="#" onclick="showSection('dashboard')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all active">
+                <i class="fa-solid fa-chart-line"></i>
+                <span class="font-medium">Dashboard</span>
+            </a>
+            <a href="#" onclick="showSection('students')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all">
+                <i class="fa-solid fa-users"></i>
+                <span class="font-medium">Talabalar</span>
+            </a>
+            <a href="#" onclick="showSection('results')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all">
+                <i class="fa-solid fa-chart-bar"></i>
+                <span class="font-medium">Natijalar</span>
+            </a>
+            <a href="#" onclick="showSection('ranking')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all">
+                <i class="fa-solid fa-trophy"></i>
+                <span class="font-medium">Reyting</span>
+            </a>
+            <a href="#" onclick="showSection('settings')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all">
+                <i class="fa-solid fa-cog"></i>
+                <span class="font-medium">Sozlamalar</span>
+            </a>
+        </div>
+
+        <div class="pt-8 border-t border-slate-700">
+            <button onclick="logout()" 
+                    class="w-full py-4 bg-red-500/10 hover:bg-red-500 hover:text-white rounded-2xl flex items-center justify-center gap-3 text-sm font-medium transition-all">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Chiqish
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8">
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="section active">
+            <h1 class="title-font text-5xl font-bold mb-10">Admin Dashboard</h1>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="glass rounded-3xl p-8">
+                    <div class="text-4xl mb-4">👥</div>
+                    <div class="text-5xl font-bold">248</div>
+                    <div class="text-slate-400">Jami talabalar</div>
+                </div>
+                <div class="glass rounded-3xl p-8">
+                    <div class="text-4xl mb-4">📝</div>
+                    <div class="text-5xl font-bold">124</div>
+                    <div class="text-slate-400">Bugun topshirilgan testlar</div>
+                </div>
+                <div class="glass rounded-3xl p-8">
+                    <div class="text-4xl mb-4">🏆</div>
+                    <div class="text-5xl font-bold">87%</div>
+                    <div class="text-slate-400">O‘rtacha natija</div>
+                </div>
+                <div class="glass rounded-3xl p-8">
+                    <div class="text-4xl mb-4">🔥</div>
+                    <div class="text-5xl font-bold">12</div>
+                    <div class="text-slate-400">Faol foydalanuvchilar</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Talabalar ro‘yxati -->
+        <div id="students" class="section hidden">
+            <h2 class="title-font text-4xl font-bold mb-8">Talabalar ro‘yxati</h2>
+            <div class="glass rounded-3xl overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-slate-800">
+                        <tr>
+                            <th class="px-8 py-5 text-left">Ism</th>
+                            <th class="px-8 py-5 text-left">Kurs / Guruh</th>
+                            <th class="px-8 py-5 text-left">Email</th>
+                            <th class="px-8 py-5 text-center">Testlar soni</th>
+                            <th class="px-8 py-5 text-center">O‘rtacha ball</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTable" class="text-sm"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Natijalar -->
+        <div id="results" class="section hidden">
+            <h2 class="title-font text-4xl font-bold mb-8">Barcha natijalar</h2>
+            <div id="resultsList" class="space-y-4"></div>
+        </div>
+
+        <!-- Reyting -->
+        <div id="ranking" class="section hidden">
+            <h2 class="title-font text-4xl font-bold mb-8">Umumiy Reyting</h2>
+            <div class="glass rounded-3xl p-8">
+                <p class="text-center text-slate-400 py-20">Reyting jadvali (demo) — real loyihada backend bilan bog‘lanadi</p>
+            </div>
+        </div>
+
+        <!-- Sozlamalar -->
+        <div id="settings" class="section hidden">
+            <h2 class="title-font text-4xl font-bold mb-8">Admin Sozlamalari</h2>
+            <div class="glass rounded-3xl p-12 text-center">
+                <p class="text-xl">Bu yerda admin panel sozlamalari bo‘ladi (foydalanuvchi qo‘shish, fan qo‘shish va h.k.)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo ma'lumotlar
+        const demoStudents = [
+            {id:1, name:"Azizbek Rahmanov", kurs:"3-kurs", email:"azizbek@instsu.uz", tests:12, avg:92},
+            {id:2, name:"Madina Karimova", kurs:"4-kurs", email:"madina@instsu.uz", tests:15, avg:96},
+            {id:3, name:"Shoxrux Juraev", kurs:"2-kurs", email:"shoxrux@instsu.uz", tests:8, avg:85},
+        ];
+
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(section).classList.remove('hidden');
+        }
+
+        function renderStudents() {
+            const tbody = document.getElementById('studentsTable');
+            tbody.innerHTML = demoStudents.map(student => `
+                <tr class="border-b border-slate-700 hover:bg-slate-800/50">
+                    <td class="px-8 py-6">${student.name}</td>
+                    <td class="px-8 py-6">${student.kurs}</td>
+                    <td class="px-8 py-6">${student.email}</td>
+                    <td class="px-8 py-6 text-center">${student.tests}</td>
+                    <td class="px-8 py-6 text-center font-bold text-cyan-400">${student.avg}%</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderResults() {
+            const container = document.getElementById('resultsList');
+            container.innerHTML = `
+                <div class="glass rounded-3xl p-8">
+                    <p class="text-center text-slate-400 py-12">Barcha talabalar natijalari (demo). Real loyihada backend orqali yuklanadi.</p>
+                </div>
+            `;
+        }
+
+        function logout() {
+            if (confirm("Admin paneldan chiqishni xohlaysizmi?")) {
+                window.location.href = "login.html";
+            }
+        }
+
+        // Init
+        window.onload = () => {
+            renderStudents();
+            renderResults();
+            showSection('dashboard');
+        };
+    </script>
+</body>
+</html>
