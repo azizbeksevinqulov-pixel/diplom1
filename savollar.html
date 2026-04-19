@@ -10,237 +10,201 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-        
         * { font-family: 'Inter', system_ui, sans-serif; }
         .title-font { font-family: 'Space Grotesk', sans-serif; }
-
-        .glass {
-            background: rgba(15, 23, 42, 0.88);
-            backdrop-filter: blur(32px);
-            border: 1px solid rgba(103, 232, 249, 0.25);
-        }
-
-        .question-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .option {
-            transition: all 0.3s ease;
-        }
-        
-        .option:hover {
-            transform: translateX(8px);
-            background-color: rgba(103, 232, 249, 0.1);
-            border-color: rgb(103 232 249);
-        }
-        
-        .option.selected {
-            background-color: rgba(103, 232, 249, 0.15);
-            border-color: rgb(103 232 249);
-            font-weight: 600;
-        }
-
-        .progress-bar {
-            transition: width 0.4s ease;
-        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-950 via-slate-900 to-black text-slate-200 min-h-screen">
 
-    <!-- Top Navigation -->
+    <!-- Navbar -->
     <nav class="bg-slate-900/95 border-b border-slate-700/50 sticky top-0 z-50 backdrop-blur-2xl">
         <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <div class="w-11 h-11 bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center text-4xl shadow-xl">📘</div>
-                <div>
-                    <div class="title-font text-3xl font-bold tracking-tighter">INSTSU</div>
-                    <div class="text-xs text-cyan-400 -mt-1">Smart Campus</div>
-                </div>
+                <div class="w-11 h-11 bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center text-4xl">📘</div>
+                <div class="title-font text-3xl font-bold tracking-tighter">INSTSU</div>
             </div>
-            
-            <div class="flex items-center gap-6">
-                <div class="flex items-center gap-3 bg-slate-800 rounded-3xl px-5 py-2">
-                    <div class="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-2xl flex items-center justify-center text-sm font-bold">
-                        AR
-                    </div>
-                    <div>
-                        <div class="text-sm font-medium" id="studentName">Azizbek Rahmanov</div>
-                        <div class="text-xs text-slate-400">3-kurs talabasi</div>
-                    </div>
-                </div>
-                <button onclick="logout()" 
-                        class="px-6 py-3 bg-red-500/10 hover:bg-red-500 hover:text-white rounded-3xl flex items-center gap-2 text-sm font-medium transition-all">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    Chiqish
-                </button>
-            </div>
+            <button onclick="logout()" class="px-6 py-3 bg-red-500/10 hover:bg-red-500 hover:text-white rounded-3xl flex items-center gap-2 text-sm font-medium">
+                <i class="fa-solid fa-right-from-bracket"></i> Chiqish
+            </button>
         </div>
     </nav>
 
-    <div class="max-w-3xl mx-auto px-6 py-10">
-        
-        <!-- Header -->
-        <div class="glass rounded-3xl p-8 mb-8">
-            <div class="flex justify-between items-start">
-                <div>
-                    <h1 class="title-font text-4xl font-bold">Axborot xavfsizligi</h1>
-                    <p class="text-slate-400 mt-2">Imtihon • 10 savol • 20 daqiqa</p>
-                </div>
-                <div class="text-right">
-                    <div class="text-5xl font-bold text-cyan-400" id="progressText">1/10</div>
-                    <div class="text-xs text-slate-500">Savol</div>
-                </div>
-            </div>
+    <div class="max-w-4xl mx-auto px-6 py-10">
+
+        <!-- 1. Fan tanlash ekrani -->
+        <div id="subjectScreen">
+            <h1 class="title-font text-5xl font-bold text-center mb-4">Imtihon fanini tanlang</h1>
+            <p class="text-center text-slate-400 mb-12">Har bir fanda 20 ta savol • Real natijalar saqlanadi</p>
             
-            <!-- Progress Bar -->
-            <div class="mt-6 h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div id="progressBar" class="progress-bar h-full bg-gradient-to-r from-cyan-400 to-purple-500 w-1/10 rounded-full"></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div onclick="startTest('Axborot xavfsizligi')" class="glass rounded-3xl p-8 text-center card-hover cursor-pointer">
+                    <div class="text-6xl mb-6">🔒</div>
+                    <h3 class="text-2xl font-bold">Axborot xavfsizligi</h3>
+                    <p class="text-slate-400 mt-2">20 savol</p>
+                </div>
+                <div onclick="startTest('Big Data')" class="glass rounded-3xl p-8 text-center card-hover cursor-pointer">
+                    <div class="text-6xl mb-6">📊</div>
+                    <h3 class="text-2xl font-bold">Big Data</h3>
+                    <p class="text-slate-400 mt-2">20 savol</p>
+                </div>
+                <div onclick="startTest('Xorijiy til')" class="glass rounded-3xl p-8 text-center card-hover cursor-pointer">
+                    <div class="text-6xl mb-6">🌍</div>
+                    <h3 class="text-2xl font-bold">Xorijiy til</h3>
+                    <p class="text-slate-400 mt-2">20 savol</p>
+                </div>
             </div>
         </div>
 
-        <!-- Question Card -->
-        <div id="questionCard" class="glass rounded-3xl p-10 question-card">
-            <!-- JavaScript orqali to'ldiriladi -->
-        </div>
+        <!-- 2. Test ekrani (yashirin) -->
+        <div id="testScreen" class="hidden">
+            <div class="glass rounded-3xl p-8 mb-8">
+                <div class="flex justify-between items-center">
+                    <h2 id="subjectTitle" class="title-font text-3xl font-bold"></h2>
+                    <div class="text-right">
+                        <div id="progressText" class="text-4xl font-bold text-cyan-400">1/20</div>
+                        <div class="text-xs text-slate-400">savol</div>
+                    </div>
+                </div>
+                <div class="h-2 bg-slate-700 rounded-full mt-6 overflow-hidden">
+                    <div id="progressBar" class="progress-bar h-full bg-gradient-to-r from-cyan-400 to-purple-500 w-1/20"></div>
+                </div>
+            </div>
 
-        <!-- Navigation Buttons -->
-        <div class="flex justify-between mt-8">
-            <button onclick="prevQuestion()" id="prevBtn"
-                    class="flex items-center gap-3 px-8 py-4 bg-slate-800 hover:bg-slate-700 rounded-3xl transition-all disabled:opacity-50">
-                <i class="fa-solid fa-arrow-left"></i>
-                <span>Oldingi savol</span>
-            </button>
-            
-            <button onclick="nextQuestion()" id="nextBtn"
-                    class="flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 font-bold rounded-3xl transition-all hover:scale-105">
-                <span id="nextText">Keyingi savol</span>
-                <i class="fa-solid fa-arrow-right"></i>
-            </button>
+            <div id="questionCard" class="glass rounded-3xl p-10"></div>
+
+            <div class="flex justify-between mt-8">
+                <button onclick="prevQuestion()" id="prevBtn" class="flex items-center gap-3 px-8 py-4 bg-slate-800 hover:bg-slate-700 rounded-3xl disabled:opacity-50">
+                    <i class="fa-solid fa-arrow-left"></i> Oldingi
+                </button>
+                <button onclick="nextQuestion()" id="nextBtn" class="flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 font-bold rounded-3xl">
+                    <span id="nextText">Keyingi savol</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Demo savollar (ko'proq qo'shish mumkin)
-        let questions = [
-            {
-                id: 1,
-                question: "Ma'lumotlarni himoya qilishning asosiy maqsadi nima?",
-                options: [
-                    "Kompyuter tezligini oshirish",
-                    "Maxfiylik va xavfsizlikni ta'minlash",
-                    "Internet tezligini yaxshilash",
-                    "Fayllarni katta hajmda saqlash"
-                ],
-                correct: 1
-            },
-            {
-                id: 2,
-                question: "Phishing hujumi qanday usulda amalga oshiriladi?",
-                options: [
-                    "To'g'ridan-to'g'ri virus yuklash orqali",
-                    "Soxta veb-saytlar va email xabarlari orqali",
-                    "Wi-Fi tarmog'ini buzish orqali",
-                    "Kompyuterni o'g'irlash orqali"
-                ],
-                correct: 1
-            },
-            {
-                id: 3,
-                question: "Eng kuchli parol qaysi uslubda yaratiladi?",
-                options: [
-                    "Tug'ilgan sana + ism",
-                    "Harflar, raqamlar va maxsus belgilardan iborat uzun parol",
-                    "Faqat raqamlardan iborat",
-                    "O'zbekcha so'zlar"
-                ],
-                correct: 1
-            }
-            // Yana 7 ta savol qo'shishingiz mumkin
-        ];
-
-        let currentQuestion = 0;
-        let userAnswers = new Array(questions.length).fill(null);
+        let currentSubject = "";
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
         let currentUser = JSON.parse(localStorage.getItem('instsu_current_user')) || {};
 
-        function renderQuestion() {
-            const q = questions[currentQuestion];
-            const progress = Math.round(((currentQuestion + 1) / questions.length) * 100);
+        // 3 ta fan — har birida 20 ta savol
+        const questionsDB = {
+            "Axborot xavfsizligi": [
+                {q: "Ma'lumotni himoya qilishning asosiy maqsadi nima?", options: ["Tezlikni oshirish", "Maxfiylikni ta'minlash", "Narxni pasaytirish", "Internetni tezlashtirish"], correct: 1},
+                {q: "Phishing hujumi nima?", options: ["Virus", "Soxta sayt va xabarlar", "Wi-Fi buzish", "Fayl o'g'irlash"], correct: 1},
+                // ... qolgan 18 ta savolni shu tarzda qo'shish mumkin (demo uchun 2 ta ko'rsatildi)
+                // Sizga kerak bo'lsa, qolgan savollarni qo'shib yuboraman
+            ],
+            "Big Data": [
+                {q: "Big Data ning 3V si nimalardan iborat?", options: ["Volume, Velocity, Variety", "Value, Vision, Version", "Voice, Video, Visual"], correct: 0},
+                {q: "Hadoop nima uchun ishlatiladi?", options: ["Kichik ma'lumotlar", "Katta hajmdagi ma'lumotlarni qayta ishlash", "Grafika yaratish"], correct: 1},
+                // ... qolgan 18 ta
+            ],
+            "Xorijiy til": [
+                {q: "The best way to learn English is ...", options: ["watching movies only", "practice speaking every day", "reading books only"], correct: 1},
+                {q: "'I have been living here for 5 years' — bu qanday zamon?", options: ["Present Simple", "Present Perfect Continuous", "Past Perfect"], correct: 1},
+                // ... qolgan 18 ta
+            ]
+        };
 
-            document.getElementById('progressText').textContent = `${currentQuestion + 1}/${questions.length}`;
-            document.getElementById('progressBar').style.width = `${progress}%`;
-
-            let html = `
-                <div class="mb-10">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="px-4 py-1 bg-cyan-400/10 text-cyan-400 text-sm font-medium rounded-full">Savol ${currentQuestion + 1}</span>
-                    </div>
-                    <h2 class="text-2xl leading-relaxed font-medium">${q.question}</h2>
-                </div>
-                
-                <div class="space-y-4">
-                    ${q.options.map((option, index) => `
-                        <div onclick="selectOption(${index})" 
-                             class="option flex items-center gap-4 p-6 rounded-2xl border border-slate-600 cursor-pointer text-lg ${userAnswers[currentQuestion] === index ? 'selected' : ''}">
-                            <div class="w-8 h-8 rounded-xl border-2 border-slate-500 flex items-center justify-center font-bold text-sm flex-shrink-0">
-                                ${String.fromCharCode(65 + index)}
-                            </div>
-                            <div>${option}</div>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-
-            document.getElementById('questionCard').innerHTML = html;
-
-            // Tugmalar holati
-            document.getElementById('prevBtn').disabled = currentQuestion === 0;
-            document.getElementById('nextText').textContent = 
-                (currentQuestion === questions.length - 1) ? "Testni yakunlash" : "Keyingi savol";
+        function startTest(subject) {
+            currentSubject = subject;
+            currentQuestionIndex = 0;
+            userAnswers = new Array(questionsDB[subject].length).fill(null);
+            
+            document.getElementById('subjectScreen').classList.add('hidden');
+            document.getElementById('testScreen').classList.remove('hidden');
+            
+            document.getElementById('subjectTitle').textContent = subject;
+            renderQuestion();
         }
 
-        function selectOption(index) {
-            userAnswers[currentQuestion] = index;
+        function renderQuestion() {
+            const questions = questionsDB[currentSubject];
+            const q = questions[currentQuestionIndex];
+            
+            document.getElementById('progressText').textContent = `${currentQuestionIndex + 1}/${questions.length}`;
+            document.getElementById('progressBar').style.width = `${((currentQuestionIndex + 1) / questions.length) * 100}%`;
+
+            let html = `<h2 class="text-2xl font-medium mb-8">${q.q}</h2>`;
+            html += `<div class="space-y-4">`;
+            q.options.forEach((opt, i) => {
+                html += `
+                <div onclick="selectAnswer(${i})" class="option p-6 rounded-2xl border border-slate-600 cursor-pointer flex items-center gap-4 ${userAnswers[currentQuestionIndex] === i ? 'selected' : ''}">
+                    <span class="font-bold text-cyan-400">${String.fromCharCode(65 + i)}.</span>
+                    <span>${opt}</span>
+                </div>`;
+            });
+            html += `</div>`;
+            document.getElementById('questionCard').innerHTML = html;
+
+            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+            document.getElementById('nextText').textContent = (currentQuestionIndex === questions.length - 1) ? "Testni yakunlash" : "Keyingi savol";
+        }
+
+        function selectAnswer(index) {
+            userAnswers[currentQuestionIndex] = index;
             renderQuestion();
         }
 
         function nextQuestion() {
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
+            const questions = questionsDB[currentSubject];
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
                 renderQuestion();
             } else {
-                // Test tugadi
-                const score = userAnswers.filter(a => a !== null).length;
-                const percentage = Math.round((score / questions.length) * 100);
-                
-                alert(`🎉 Test tugadi!\n\nTo'g'ri javoblar: ${score}/${questions.length}\nNatija: ${percentage}%\n\nNatijangiz saqlandi!`);
-                window.location.href = "index.html";
+                finishTest();
             }
         }
 
         function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
                 renderQuestion();
             }
         }
 
+        function finishTest() {
+            const questions = questionsDB[currentSubject];
+            let correctCount = 0;
+            userAnswers.forEach((ans, i) => {
+                if (ans === questions[i].correct) correctCount++;
+            });
+
+            const percentage = Math.round((correctCount / questions.length) * 100);
+
+            // REAL natijani saqlash (localStorage)
+            let results = JSON.parse(localStorage.getItem('instsu_results')) || [];
+            results.push({
+                username: currentUser.username,
+                fullName: currentUser.fullName || currentUser.username,
+                subject: currentSubject,
+                score: correctCount,
+                total: questions.length,
+                percentage: percentage,
+                date: new Date().toLocaleString('uz-UZ')
+            });
+            localStorage.setItem('instsu_results', JSON.stringify(results));
+
+            alert(`🎉 Test tugadi!\nFan: ${currentSubject}\nNatija: ${correctCount}/${questions.length} (${percentage}%)`);
+            window.location.href = "index.html";
+        }
+
         function logout() {
-            if (confirm("Imtihondan chiqishni xohlaysizmi? Javoblaringiz saqlanmaydi.")) {
+            if (confirm("Chiqishni xohlaysizmi?")) {
                 localStorage.removeItem('instsu_current_user');
                 window.location.href = "login.html";
             }
         }
 
-        // Sahifa yuklanganda
         window.onload = () => {
             if (!currentUser.username) {
                 alert("Iltimos, avval tizimga kiring!");
                 window.location.href = "login.html";
-                return;
             }
-
-            document.getElementById('studentName').textContent = currentUser.fullName || currentUser.username;
-            renderQuestion();
         };
     </script>
 </body>
