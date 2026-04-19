@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TestZamon - Kirish</title>
+    <title>INSTSU Test - Kirish</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -12,91 +12,44 @@
     
     <div class="bg-slate-900 border border-slate-700 rounded-3xl p-10 w-full max-w-md auth-card">
         <div class="flex justify-center mb-8">
-            <div class="w-20 h-20 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-3xl flex items-center justify-center text-5xl shadow-2xl">
-                📝
-            </div>
+            <div class="w-20 h-20 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-3xl flex items-center justify-center text-5xl shadow-2xl">📘</div>
         </div>
-        <h1 class="text-4xl font-bold text-center mb-2">TestZamon</h1>
-        <p class="text-slate-400 text-center mb-10">Zamonaviy imtihon tizimi</p>
+        <h1 class="text-4xl font-bold text-center mb-2">INSTSU Test</h1>
+        <p class="text-slate-400 text-center mb-10">Institut imtihon tizimi</p>
 
-        <!-- Login Form -->
         <div id="loginForm">
             <h2 class="text-2xl font-semibold text-center mb-6">Kirish</h2>
             <div class="space-y-5">
                 <div>
                     <label class="block text-sm mb-2">Foydalanuvchi nomi yoki Email</label>
-                    <input id="loginUsername" type="text" 
-                           class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none"
-                           placeholder="azizbek yoki email@example.com">
+                    <input id="loginUsername" type="text" class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none" placeholder="azizbek yoki email@example.com">
                 </div>
                 <div>
                     <label class="block text-sm mb-2">Parol</label>
-                    <input id="loginPassword" type="password" 
-                           class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none"
-                           placeholder="••••••••">
+                    <input id="loginPassword" type="password" class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none" placeholder="••••••••">
                 </div>
-                <button onclick="loginUser()" 
-                        class="w-full bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-bold py-5 rounded-3xl text-lg transition">
-                    Kirish
-                </button>
+                <button onclick="loginUser()" class="w-full bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-bold py-5 rounded-3xl text-lg transition">Kirish</button>
             </div>
-            <p class="text-center mt-8 text-slate-400">
-                Hisob yo‘qmi? 
-                <span onclick="switchToRegister()" class="text-cyan-400 cursor-pointer hover:underline">Ro‘yxatdan o‘ting</span>
-            </p>
+            <p class="text-center mt-8 text-slate-400">Hisob yo‘qmi? <span onclick="switchToRegister()" class="text-cyan-400 cursor-pointer hover:underline">Ro‘yxatdan o‘ting</span></p>
         </div>
 
-        <!-- Register Form -->
         <div id="registerForm" class="hidden">
             <h2 class="text-2xl font-semibold text-center mb-6">Ro‘yxatdan o‘tish</h2>
             <div class="space-y-5">
-                <div>
-                    <label class="block text-sm mb-2">To‘liq ism</label>
-                    <input id="regFullName" type="text" 
-                           class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none"
-                           placeholder="Azizbek Rahmanov">
-                </div>
-                <div>
-                    <label class="block text-sm mb-2">Foydalanuvchi nomi</label>
-                    <input id="regUsername" type="text" 
-                           class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none"
-                           placeholder="azizbek10">
-                </div>
-                <div>
-                    <label class="block text-sm mb-2">Email</label>
-                    <input id="regEmail" type="email" 
-                           class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none"
-                           placeholder="azizbek@example.com">
-                </div>
-                <div>
-                    <label class="block text-sm mb-2">Parol</label>
-                    <input id="regPassword" type="password" 
-                           class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none"
-                           placeholder="Kamida 6 ta belgi">
-                </div>
-                <div>
-                    <label class="block text-sm mb-2">Sinfi</label>
-                    <input id="regClass" type="text" value="10-sinf"
-                           class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none">
-                </div>
-                <button onclick="registerUser()" 
-                        class="w-full bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-bold py-5 rounded-3xl text-lg transition">
-                    Ro‘yxatdan o‘tish
-                </button>
+                <div><label class="block text-sm mb-2">To‘liq ism</label><input id="regFullName" type="text" class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none" placeholder="Azizbek Rahmanov"></div>
+                <div><label class="block text-sm mb-2">Foydalanuvchi nomi</label><input id="regUsername" type="text" class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none" placeholder="azizbek10"></div>
+                <div><label class="block text-sm mb-2">Email</label><input id="regEmail" type="email" class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none" placeholder="azizbek@example.com"></div>
+                <div><label class="block text-sm mb-2">Parol</label><input id="regPassword" type="password" class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none" placeholder="Kamida 6 ta belgi"></div>
+                <div><label class="block text-sm mb-2">Guruh / Sinf</label><input id="regClass" type="text" value="INSTSU" class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-5 py-4 outline-none"></div>
+                <button onclick="registerUser()" class="w-full bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-bold py-5 rounded-3xl text-lg transition">Ro‘yxatdan o‘tish</button>
             </div>
-            <p class="text-center mt-8 text-slate-400">
-                Allaqachon hisobingiz bormi? 
-                <span onclick="switchToLogin()" class="text-cyan-400 cursor-pointer hover:underline">Kirish</span>
-            </p>
+            <p class="text-center mt-8 text-slate-400">Allaqachon hisobingiz bormi? <span onclick="switchToLogin()" class="text-cyan-400 cursor-pointer hover:underline">Kirish</span></p>
         </div>
     </div>
 
     <script>
-        let users = JSON.parse(localStorage.getItem('testzamon_users')) || [];
-
-        function saveUsers() {
-            localStorage.setItem('testzamon_users', JSON.stringify(users));
-        }
+        let users = JSON.parse(localStorage.getItem('instsu_users')) || [];
+        function saveUsers() { localStorage.setItem('instsu_users', JSON.stringify(users)); }
 
         function registerUser() {
             const fullName = document.getElementById('regFullName').value.trim();
@@ -105,65 +58,37 @@
             const password = document.getElementById('regPassword').value.trim();
             const userClass = document.getElementById('regClass').value.trim();
 
-            if (!fullName || !username || !email || !password) {
-                alert("Barcha maydonlarni to‘ldiring!");
-                return;
-            }
-            if (password.length < 6) {
-                alert("Parol kamida 6 ta belgidan iborat bo‘lishi kerak!");
-                return;
-            }
-            if (users.find(u => u.username === username || u.email === email)) {
-                alert("Bu foydalanuvchi nomi yoki email allaqachon mavjud!");
-                return;
-            }
+            if (!fullName || !username || !email || !password) return alert("Barcha maydonlarni to‘ldiring!");
+            if (password.length < 6) return alert("Parol kamida 6 ta belgidan iborat bo‘lishi kerak!");
+            if (users.find(u => u.username === username || u.email === email)) return alert("Bu username yoki email band!");
 
-            users.push({
-                id: Date.now(),
-                fullName,
-                username,
-                email,
-                password,
-                class: userClass || "10-sinf",
-                createdAt: new Date().toISOString()
-            });
-
+            users.push({ id: Date.now(), fullName, username, email, password, class: userClass || "INSTSU", createdAt: new Date().toISOString() });
             saveUsers();
-            alert("✅ Ro‘yxatdan o‘tish muvaffaqiyatli! Endi kirishingiz mumkin.");
+            alert("✅ Ro‘yxatdan o‘tish muvaffaqiyatli!");
             switchToLogin();
         }
 
         function loginUser() {
             const input = document.getElementById('loginUsername').value.trim();
             const password = document.getElementById('loginPassword').value.trim();
-
-            const user = users.find(u => 
-                (u.username === input || u.email === input) && u.password === password
-            );
-
+            const user = users.find(u => (u.username === input || u.email === input) && u.password === password);
             if (user) {
-                localStorage.setItem('testzamon_current_user', JSON.stringify(user));
-                window.location.href = "index.html";  // Asosiy sahifaga o'tish
-            } else {
-                alert("❌ Foydalanuvchi nomi yoki parol noto‘g‘ri!");
-            }
+                localStorage.setItem('instsu_current_user', JSON.stringify(user));
+                window.location.href = "index.html";
+            } else alert("❌ Login yoki parol noto‘g‘ri!");
         }
 
         function switchToRegister() {
             document.getElementById('loginForm').classList.add('hidden');
             document.getElementById('registerForm').classList.remove('hidden');
         }
-
         function switchToLogin() {
             document.getElementById('registerForm').classList.add('hidden');
             document.getElementById('loginForm').classList.remove('hidden');
         }
 
-        // Agar allaqachon kirgan bo‘lsa, to‘g‘ridan index.html ga o‘tkazish
         window.onload = () => {
-            if (localStorage.getItem('testzamon_current_user')) {
-                window.location.href = "index.html";
-            }
+            if (localStorage.getItem('instsu_current_user')) window.location.href = "index.html";
         };
     </script>
 </body>
