@@ -12,7 +12,6 @@
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-950 to-black text-slate-200 min-h-screen flex items-center justify-center">
-    
     <div class="glass w-full max-w-md rounded-3xl p-12 border border-cyan-400/20">
         <div class="flex justify-center mb-8">
             <div class="w-20 h-20 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-3xl flex items-center justify-center text-5xl shadow-2xl">📘</div>
@@ -21,19 +20,10 @@
         <p class="text-center text-slate-400 mb-10">Smart Campus Login</p>
 
         <div class="space-y-6">
-            <div>
-                <label class="block text-sm mb-2">Foydalanuvchi nomi yoki Email</label>
-                <input id="username" type="text" 
-                       class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-6 py-4 outline-none"
-                       placeholder="admin yoki azizbek">
-            </div>
-            <div>
-                <label class="block text-sm mb-2">Parol</label>
-                <input id="password" type="password" 
-                       class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-6 py-4 outline-none"
-                       placeholder="••••••••">
-            </div>
-
+            <input id="username" type="text" placeholder="Foydalanuvchi nomi yoki Email" 
+                   class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-6 py-4 outline-none">
+            <input id="password" type="password" placeholder="Parol" 
+                   class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-6 py-4 outline-none">
             <button onclick="login()" 
                     class="w-full bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 font-bold py-5 rounded-3xl text-lg transition-all hover:scale-105">
                 Kirish
@@ -41,9 +31,9 @@
         </div>
 
         <p class="text-center text-xs text-slate-500 mt-8">
-            Demo: <br>
-            Admin: <span class="text-cyan-400">admin</span> / Parol: <span class="text-cyan-400">admin123</span><br>
-            Talaba: <span class="text-cyan-400">azizbek</span> / Parol: <span class="text-cyan-400">123456</span>
+            Demo:<br>
+            Admin → <span class="text-cyan-400">admin</span> / <span class="text-cyan-400">admin123</span><br>
+            Talaba → <span class="text-cyan-400">azizbek</span> / <span class="text-cyan-400">123456</span>
         </p>
     </div>
 
@@ -53,20 +43,11 @@
             const password = document.getElementById('password').value.trim();
 
             if (username === "admin" && password === "admin123") {
-                localStorage.setItem('instsu_current_user', JSON.stringify({
-                    role: "admin",
-                    fullName: "Admin",
-                    username: "admin"
-                }));
+                localStorage.setItem('instsu_current_user', JSON.stringify({ role: "admin", fullName: "Admin", username: "admin" }));
                 window.location.href = "admin.html";
             } 
-            else if ((username === "azizbek" || username === "talaba") && password === "123456") {
-                localStorage.setItem('instsu_current_user', JSON.stringify({
-                    role: "student",
-                    fullName: "Azizbek Rahmanov",
-                    username: "azizbek",
-                    kurs: "3-kurs"
-                }));
+            else if (username === "azizbek" && password === "123456") {
+                localStorage.setItem('instsu_current_user', JSON.stringify({ role: "student", fullName: "Azizbek Rahmanov", username: "azizbek", kurs: "3-kurs" }));
                 window.location.href = "index.html";
             } 
             else {
