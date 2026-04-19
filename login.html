@@ -6,44 +6,131 @@
     <title>INSTSU • Kirish</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
         * { font-family: 'Inter', system_ui, sans-serif; }
+        .title-font { font-family: 'Space Grotesk', sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e2937 50%, #0a0f1c 100%);
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(32px);
+            border: 1px solid rgba(103, 232, 249, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            border-color: rgb(103 232 249);
+            box-shadow: 0 0 0 4px rgba(103, 232, 249, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .login-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.7s;
+        }
+        
+        .login-btn:hover::before {
+            left: 200%;
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-950 to-black text-slate-200 min-h-screen flex items-center justify-center">
-    
-    <div class="glass w-full max-w-md rounded-3xl p-12 border border-cyan-400/20">
-        <div class="flex justify-center mb-8">
-            <div class="w-20 h-20 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-3xl flex items-center justify-center text-5xl shadow-2xl">📘</div>
-        </div>
-        <h1 class="title-font text-4xl font-bold text-center mb-2">INSTSU</h1>
-        <p class="text-center text-slate-400 mb-10">Smart Campus Login</p>
+<body class="min-h-screen flex items-center justify-center relative overflow-hidden">
 
+    <!-- Background decoration -->
+    <div class="absolute inset-0 bg-[radial-gradient(at_top_right,#22d3ee_0%,transparent_50%)] opacity-10"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(at_bottom_left,#a855f7_0%,transparent_50%)] opacity-10"></div>
+
+    <div class="glass w-full max-w-md mx-4 rounded-3xl p-10 md:p-12 relative z-10">
+        
+        <!-- Logo -->
+        <div class="flex justify-center mb-8">
+            <div class="relative">
+                <div class="w-24 h-24 bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center text-6xl shadow-2xl shadow-cyan-500/30">
+                    📘
+                </div>
+                <div class="absolute -top-2 -right-2 w-8 h-8 bg-emerald-400 rounded-2xl flex items-center justify-center text-xs font-bold ring-4 ring-slate-950">
+                    SU
+                </div>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="title-font text-5xl font-bold text-center mb-2 tracking-tighter">INSTSU</h1>
+        <p class="text-center text-slate-400 text-lg mb-10">Smart Campus Tizimi</p>
+
+        <!-- Form -->
         <div class="space-y-6">
             <div>
-                <label class="block text-sm mb-2">Foydalanuvchi nomi yoki Email</label>
-                <input id="username" type="text" 
-                       class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-6 py-4 outline-none"
-                       placeholder="admin yoki azizbek">
-            </div>
-            <div>
-                <label class="block text-sm mb-2">Parol</label>
-                <input id="password" type="password" 
-                       class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-6 py-4 outline-none"
-                       placeholder="••••••••">
+                <label class="block text-sm font-medium text-slate-300 mb-2">Foydalanuvchi nomi yoki Email</label>
+                <div class="relative">
+                    <div class="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <input id="username" type="text"
+                           class="input-field w-full bg-slate-900/70 border border-slate-600 focus:border-cyan-400 rounded-2xl px-14 py-4 outline-none text-lg"
+                           placeholder="admin yoki azizbek">
+                </div>
             </div>
 
-            <button onclick="login()" 
-                    class="w-full bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 font-bold py-5 rounded-3xl text-lg transition-all hover:scale-105">
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Parol</label>
+                <div class="relative">
+                    <div class="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <input id="password" type="password"
+                           class="input-field w-full bg-slate-900/70 border border-slate-600 focus:border-cyan-400 rounded-2xl px-14 py-4 outline-none text-lg"
+                           placeholder="••••••••">
+                </div>
+            </div>
+
+            <!-- Login Button -->
+            <button onclick="login()"
+                    class="login-btn w-full bg-gradient-to-r from-cyan-400 to-purple-500 hover:from-cyan-300 hover:to-purple-400 text-slate-950 font-bold py-5 rounded-3xl text-xl transition-all duration-300 shadow-xl shadow-purple-500/30">
                 Kirish
             </button>
         </div>
 
-        <p class="text-center text-xs text-slate-500 mt-8">
-            Demo: <br>
-            Admin: <span class="text-cyan-400">admin</span> / Parol: <span class="text-cyan-400">admin123</span><br>
-            Talaba: <span class="text-cyan-400">azizbek</span> / Parol: <span class="text-cyan-400">123456</span>
+        <!-- Demo credentials -->
+        <div class="mt-10 pt-8 border-t border-slate-700">
+            <p class="text-center text-xs text-slate-500 mb-4">Demo hisoblar</p>
+            <div class="grid grid-cols-2 gap-4 text-xs">
+                <div class="bg-slate-900/50 rounded-2xl p-4 border border-slate-700">
+                    <div class="font-medium text-cyan-400">Admin</div>
+                    <div class="text-slate-400">admin / <span class="text-emerald-400">admin123</span></div>
+                </div>
+                <div class="bg-slate-900/50 rounded-2xl p-4 border border-slate-700">
+                    <div class="font-medium text-cyan-400">Talaba</div>
+                    <div class="text-slate-400">azizbek / <span class="text-emerald-400">123456</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-[10px] text-slate-600 mt-10">
+            © 2026 INSTSU Smart Campus • Barcha huquqlar himoyalangan
         </p>
     </div>
 
@@ -59,7 +146,7 @@
                     username: "admin"
                 }));
                 window.location.href = "admin.html";
-            } 
+            }
             else if ((username === "azizbek" || username === "talaba") && password === "123456") {
                 localStorage.setItem('instsu_current_user', JSON.stringify({
                     role: "student",
@@ -68,11 +155,27 @@
                     kurs: "3-kurs"
                 }));
                 window.location.href = "index.html";
-            } 
+            }
             else {
-                alert("❌ Noto‘g‘ri login yoki parol!");
+                const errorMsg = document.createElement('div');
+                errorMsg.className = "fixed top-6 left-1/2 -translate-x-1/2 bg-red-500/90 text-white px-8 py-3 rounded-2xl shadow-xl flex items-center gap-3";
+                errorMsg.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Noto‘g‘ri login yoki parol!`;
+                document.body.appendChild(errorMsg);
+
+                setTimeout(() => {
+                    errorMsg.style.transition = "all 0.4s ease";
+                    errorMsg.style.opacity = "0";
+                    setTimeout(() => errorMsg.remove(), 400);
+                }, 3000);
             }
         }
+
+        // Enter tugmasi bilan kirish
+        document.addEventListener('keypress', function(e) {
+            if (e.key === "Enter") {
+                login();
+            }
+        });
     </script>
 </body>
 </html>
