@@ -8,18 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-        
         * { font-family: 'Inter', system_ui, sans-serif; }
         .title-font { font-family: 'Space Grotesk', sans-serif; }
 
         .glass {
-            background: rgba(15, 23, 42, 0.85);
+            background: rgba(15, 23, 42, 0.88);
             backdrop-filter: blur(32px);
             border: 1px solid rgba(103, 232, 249, 0.3);
-        }
-
-        .card-hover {
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .card-hover:hover {
             transform: translateY(-20px) scale(1.05);
@@ -29,15 +24,11 @@
 </head>
 <body class="bg-gradient-to-br from-slate-950 via-slate-900 to-black text-slate-200 min-h-screen">
 
-    <!-- NAVBAR -->
     <nav class="bg-slate-900/95 border-b border-slate-700/50 sticky top-0 z-50 backdrop-blur-2xl">
         <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center text-4xl shadow-2xl">📘</div>
-                <div>
-                    <h1 class="title-font text-4xl font-bold tracking-tighter">INSTSU</h1>
-                    <p class="text-xs text-cyan-300 tracking-widest -mt-1">SMART CAMPUS</p>
-                </div>
+                <div class="title-font text-4xl font-bold tracking-tighter">INSTSU</div>
             </div>
 
             <div class="flex items-center gap-6">
@@ -56,8 +47,6 @@
     </nav>
 
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-16">
-
-        <!-- Welcome -->
         <div class="glass rounded-3xl p-16 lg:p-24 text-center">
             <h1 class="title-font text-7xl font-bold tracking-tighter leading-none mb-6">
                 Salom, <span id="welcomeName" class="bg-gradient-to-r from-cyan-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent"></span>!
@@ -72,24 +61,23 @@
             </button>
         </div>
 
-        <!-- Bo‘limlar -->
         <div class="mt-20">
             <h2 class="title-font text-4xl font-bold mb-10 text-center">Asosiy bo‘limlar</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="glass rounded-3xl p-10 card-hover text-center">
                     <div class="text-6xl mb-6">🔐</div>
                     <h3 class="text-2xl font-semibold mb-3">Axborot xavfsizligi</h3>
-                    <p class="text-slate-400">Tizim va ma’lumotlarni himoya qilish, xavfsizlik standartlari va zamonaviy tahdidlar.</p>
+                    <p class="text-slate-400">Ma’lumotlar xavfsizligi va himoya usullari</p>
                 </div>
                 <div class="glass rounded-3xl p-10 card-hover text-center">
                     <div class="text-6xl mb-6">📊</div>
                     <h3 class="text-2xl font-semibold mb-3">Big Data</h3>
-                    <p class="text-slate-400">Katta hajmdagi ma’lumotlar bilan ishlash, analitika va zamonaviy texnologiyalar.</p>
+                    <p class="text-slate-400">Katta ma’lumotlar bilan ishlash</p>
                 </div>
                 <div class="glass rounded-3xl p-10 card-hover text-center">
                     <div class="text-6xl mb-6">🌍</div>
                     <h3 class="text-2xl font-semibold mb-3">Xorijiy til</h3>
-                    <p class="text-slate-400">IT sohasidagi ingliz tili, texnik atamalar va professional kommunikatsiya.</p>
+                    <p class="text-slate-400">IT sohasidagi ingliz tili</p>
                 </div>
             </div>
         </div>
