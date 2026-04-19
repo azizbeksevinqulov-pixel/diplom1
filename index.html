@@ -3,32 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INSTSU • Smart Campus</title>
+    <title>INSTSU • Savollar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
         * { font-family: 'Inter', system_ui, sans-serif; }
         .title-font { font-family: 'Space Grotesk', sans-serif; }
-        .glass { background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(32px); border: 1px solid rgba(103, 232, 249, 0.3); }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-950 via-slate-900 to-black text-slate-200 min-h-screen">
-
     <nav class="bg-slate-900/95 border-b border-slate-700/50 sticky top-0 z-50 backdrop-blur-2xl">
         <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center text-4xl shadow-2xl">📘</div>
+                <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center text-4xl">📘</div>
                 <div class="title-font text-4xl font-bold tracking-tighter">INSTSU</div>
             </div>
             <div class="flex items-center gap-6">
-                <div onclick="showProfile()" class="flex items-center gap-4 cursor-pointer">
-                    <div id="userAvatar" class="w-11 h-11 bg-gradient-to-br from-cyan-400 to-violet-500 text-slate-900 rounded-3xl flex items-center justify-center font-bold text-2xl"></div>
-                    <div class="hidden sm:block">
-                        <div id="displayName" class="font-semibold"></div>
-                        <div id="displayKurs" class="text-xs text-cyan-300"></div>
-                    </div>
-                </div>
                 <button onclick="logout()" class="px-6 py-3 bg-red-500/10 hover:bg-red-500 hover:text-white rounded-3xl flex items-center gap-3 text-sm font-medium transition-all">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i> Chiqish
                 </button>
@@ -36,47 +28,96 @@
         </div>
     </nav>
 
-    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-16">
-        <div class="glass rounded-3xl p-20 text-center">
-            <h1 class="title-font text-7xl font-bold tracking-tighter leading-none mb-6">
-                Salom, <span id="welcomeName" class="bg-gradient-to-r from-cyan-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent"></span>!
-            </h1>
-            <button onclick="goToSavollar()" 
-                    class="mt-12 bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-500 text-slate-950 font-bold text-2xl px-20 py-8 rounded-3xl hover:scale-110 transition-all shadow-2xl flex items-center gap-4 mx-auto">
-                <i class="fa-solid fa-graduation-cap"></i>
-                Imtihon bo‘limiga o‘tish
-            </button>
+    <div class="max-w-3xl mx-auto px-6 py-12">
+        <div class="glass rounded-3xl p-10 mb-8">
+            <h1 class="title-font text-5xl font-bold text-center mb-2">Axborot xavfsizligi</h1>
+            <p class="text-center text-slate-400">Test • 10 savol • 20 daqiqa</p>
         </div>
 
-        <div class="mt-20">
-            <h2 class="title-font text-4xl font-bold mb-10 text-center">Asosiy bo‘limlar</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass rounded-3xl p-10 card-hover text-center">🔐 Axborot xavfsizligi</div>
-                <div class="glass rounded-3xl p-10 card-hover text-center">📊 Big Data</div>
-                <div class="glass rounded-3xl p-10 card-hover text-center">🌍 Xorijiy til</div>
-            </div>
+        <div id="questionContainer" class="glass rounded-3xl p-10"></div>
+
+        <div class="flex justify-between mt-8">
+            <button onclick="prevQuestion()" id="prevBtn"
+                    class="px-8 py-4 bg-slate-700 hover:bg-slate-600 rounded-2xl transition-all flex items-center gap-2">
+                <i class="fa-solid fa-arrow-left"></i> Oldingi
+            </button>
+            <button onclick="nextQuestion()" id="nextBtn"
+                    class="px-8 py-4 bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 font-bold rounded-2xl transition-all flex items-center gap-2">
+                Keyingi <i class="fa-solid fa-arrow-right"></i>
+            </button>
         </div>
     </div>
 
     <script>
-        let currentUser = null;
-        window.onload = () => {
-            const saved = localStorage.getItem('instsu_current_user');
-            if (!saved) return window.location.href = "login.html";
-            currentUser = JSON.parse(saved);
-            document.getElementById('displayName').textContent = currentUser.fullName || currentUser.username;
-            document.getElementById('displayKurs').textContent = currentUser.kurs || "2-kurs";
-            document.getElementById('welcomeName').textContent = (currentUser.fullName || currentUser.username).split(' ')[0];
-        };
+        let currentUser = JSON.parse(localStorage.getItem('instsu_current_user')) || {};
+        if (!currentUser.username) window.location.href = "login.html";
 
-        function goToSavollar() { window.location.href = "savollar.html"; }
-        function showProfile() { alert(`Talaba: ${currentUser.fullName}\nKurs: ${currentUser.kurs}`); }
+        const questions = [
+            {
+                q: "Ma'lumotni himoya qilishning asosiy maqsadi nima?",
+                options: ["Tezlikni oshirish", "Maxfiylikni ta'minlash", "Internet tezligini oshirish", "Kompyuter narxini pasaytirish"],
+                answer: 1
+            },
+            {
+                q: "Phishing hujumi qanday amalga oshiriladi?",
+                options: ["Virus orqali", "Soxta saytlar va xabarlar orqali", "Fayl yuklab olish orqali", "Wi-Fi orqali"],
+                answer: 1
+            },
+            // Yana 8 ta savol qo'shish mumkin. Hozircha demo uchun 2 ta yetarli
+        ];
+
+        let currentQ = 0;
+        let answers = new Array(questions.length).fill(null);
+
+        function renderQuestion() {
+            const q = questions[currentQ];
+            document.getElementById('questionContainer').innerHTML = `
+                <div class="mb-8">
+                    <span class="text-cyan-400 font-medium">Savol ${currentQ + 1}/${questions.length}</span>
+                    <h2 class="text-2xl font-semibold mt-4 leading-relaxed">${q.q}</h2>
+                </div>
+                <div class="space-y-4">
+                    ${q.options.map((opt, i) => `
+                        <button onclick="selectAnswer(${i})" 
+                                class="w-full text-left px-8 py-5 rounded-2xl border border-slate-600 hover:border-cyan-400 transition-all ${answers[currentQ] === i ? 'bg-cyan-400/10 border-cyan-400' : ''}">
+                            ${String.fromCharCode(65 + i)}. ${opt}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+            document.getElementById('prevBtn').disabled = currentQ === 0;
+        }
+
+        function selectAnswer(index) {
+            answers[currentQ] = index;
+            renderQuestion();
+        }
+
+        function nextQuestion() {
+            if (currentQ < questions.length - 1) {
+                currentQ++;
+                renderQuestion();
+            } else {
+                alert("✅ Test tugadi! Natijangiz: " + Math.round((answers.filter(a => a !== null).length / questions.length) * 100) + "%");
+                window.location.href = "index.html";
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQ > 0) {
+                currentQ--;
+                renderQuestion();
+            }
+        }
+
         function logout() {
             if (confirm("Chiqishni xohlaysizmi?")) {
                 localStorage.removeItem('instsu_current_user');
                 window.location.href = "login.html";
             }
         }
+
+        window.onload = renderQuestion;
     </script>
 </body>
 </html>
