@@ -8,22 +8,53 @@
     font-family: 'Space Grotesk', sans-serif;
 }
 
+/* Glass effekt (barcha sahifalarda ishlatiladi) */
 .glass {
-    background: rgba(15, 23, 42, 0.92);
-    backdrop-filter: blur(28px);
+    background: rgba(15, 23, 42, 0.88);
+    backdrop-filter: blur(32px);
     border: 1px solid rgba(103, 232, 249, 0.25);
-    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
+/* Umumiy animatsiyalar */
 .card-hover:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Sidebar active state */
-.sidebar a.active {
-    background-color: rgba(103, 232, 249, 0.1);
-    border-left: 4px solid rgb(103 232 249);
-    color: rgb(103 232 249);
+.option {
+    transition: all 0.3s ease;
+}
+.option:hover {
+    transform: translateX(10px);
+    background-color: rgba(103, 232, 249, 0.12);
+    border-color: rgb(103 232 249);
+}
+.option.selected {
+    background-color: rgba(103, 232, 249, 0.2);
+    border-color: rgb(103 232 249);
+    font-weight: 600;
+}
+
+/* Progress bar */
+.progress-bar {
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Boshqa sahifalar uchun qo‘shimcha stillar */
+.login-btn {
+    position: relative;
+    overflow: hidden;
+}
+.login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: 0.7s;
+}
+.login-btn:hover::before {
+    left: 200%;
 }
