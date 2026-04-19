@@ -1,19 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 * {
     font-family: 'Inter', system_ui, sans-serif;
 }
 
-.auth-card {
-    animation: fadeIn 0.6s ease forwards;
+.title-font {
+    font-family: 'Space Grotesk', sans-serif;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+.glass {
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(28px);
+    border: 1px solid rgba(103, 232, 249, 0.25);
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
 }
 
 .card-hover:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 25px -5px rgb(0 212 255 / 0.15);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sidebar active state */
+.sidebar a.active {
+    background-color: rgba(103, 232, 249, 0.1);
+    border-left: 4px solid rgb(103 232 249);
+    color: rgb(103 232 249);
 }
