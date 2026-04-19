@@ -49,7 +49,7 @@
 
         <!-- Fan tanlash -->
         <div id="fanSelection" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- JS orqali to‘ldiriladi -->
+            <!-- JS bilan to‘ldiriladi -->
         </div>
 
         <!-- Quiz -->
@@ -105,10 +105,27 @@
                 id: 1,
                 name: "Axborot xavfsizligi",
                 icon: "🔐",
-                questions: [ /* 20 ta savol yuqoridagi to‘liq ro‘yxatdan olingan */ 
+                questions: [
                     {q: "Axborot xavfsizligining uchta asosiy tamoyili nima?", options: ["CIA triad", "AAA model", "OSI model", "TCP/IP"], answer: 0},
                     {q: "Phishing hujumi nima?", options: ["Foydalanuvchini aldab ma'lumot olish", "Tarmoq tezligini oshirish", "Faylni shifrlash", "Backup qilish"], answer: 0},
-                    // ... qolgan 18 ta savolni qo‘shing (oldingi javobdan nusxa oling)
+                    {q: "Firewall nima vazifani bajaradi?", options: ["Tashqi hujumlardan himoya", "Ma'lumotni tez uzatish", "Viruslarni o‘chirish", "Parolni saqlash"], answer: 0},
+                    {q: "SSL/TLS protokoli nima uchun kerak?", options: ["Ma'lumotni shifrlash", "Tezlikni oshirish", "Fayl yuklab olish", "Viruslarni aniqlash"], answer: 0},
+                    {q: "DDoS hujumi nima?", options: ["Serverni ortiqcha yuklab ishdan chiqarish", "Parolni buzish", "Ma'lumot o‘g‘irlash", "Faylni ochish"], answer: 0},
+                    {q: "Zero-day vulnerability nima?", options: ["Hali tuzatilmagan yangi zaiflik", "Eski virus", "Parol buzish", "Tarmoq uzilishi"], answer: 0},
+                    {q: "Multi-factor authentication nima?", options: ["Bir necha usul bilan tasdiqlash", "Faqat parol", "Faqat barmoq izi", "Faqat SMS"], answer: 0},
+                    {q: "Ransomware nima qiladi?", options: ["Fayllarni shifrlab pul talab qiladi", "Tarmoqni sekinlashtiradi", "Ma'lumotni o‘chiradi", "Parolni o‘zgartiradi"], answer: 0},
+                    {q: "SQL Injection nima?", options: ["Ma'lumotlar bazasiga zarar yetkazish", "Tarmoq hujumi", "Fayl yuklash", "Email spam"], answer: 0},
+                    {q: "VPN nima uchun ishlatiladi?", options: ["Xavfsiz aloqa", "Tezlik oshirish", "Fayl saqlash", "Virus o‘chirish"], answer: 0},
+                    {q: "Brute force attack nima?", options: ["Parolni kuch bilan sinash", "Phishing", "Malware", "DDoS"], answer: 0},
+                    {q: "Encryption nima?", options: ["Ma'lumotni shifrlash", "Ma'lumotni ochish", "Ma'lumotni saqlash", "Ma'lumotni o‘chirish"], answer: 0},
+                    {q: "GDPR nima?", options: ["Yevropa ma'lumotlar himoyasi qonuni", "Amerika qonuni", "O‘zbekiston qonuni", "Xitoy qonuni"], answer: 0},
+                    {q: "Antivirus dasturi nima qiladi?", options: ["Viruslarni aniqlaydi va bloklaydi", "Internet tezligini oshiradi", "Fayllarni siqadi", "Parolni saqlaydi"], answer: 0},
+                    {q: "Man-in-the-middle attack nima?", options: ["Aloqani tinglash", "Serverni buzish", "Fayl o‘g‘irlash", "Email yuborish"], answer: 0},
+                    {q: "Password manager nima uchun foydali?", options: ["Kuchli parollarni saqlash", "Parolni osonlashtirish", "Internetni tezlashtirish", "Virus o‘chirish"], answer: 0},
+                    {q: "Patch management nima?", options: ["Dasturlarni yangilash", "Faylni o‘chirish", "Parolni o‘zgartirish", "Tarmoqni uzish"], answer: 0},
+                    {q: "Social engineering nima?", options: ["Insonni aldab ma'lumot olish", "Dasturiy hujum", "Tarmoq hujumi", "Fizik hujum"], answer: 0},
+                    {q: "Backup nima uchun muhim?", options: ["Ma'lumotni yo‘qotmaslik uchun", "Tezlik oshirish uchun", "Virus o‘chirish uchun", "Parolni saqlash uchun"], answer: 0},
+                    {q: "Least privilege principle nima?", options: ["Faqat kerakli huquq berish", "Barchaga to‘liq huquq", "Hech kimga huquq bermaslik", "Faqat adminlarga"], answer: 0}
                 ]
             },
             {
@@ -143,7 +160,7 @@
         function renderFanSelection() {
             const container = document.getElementById('fanSelection');
             container.innerHTML = subjectsData.map(sub => `
-                <div onclick="startQuiz(${sub.id})" class="glass rounded-3xl p-10 text-center cursor-pointer hover:scale-105 transition-all">
+                <div onclick="startQuiz(${sub.id})" class="glass rounded-3xl p-10 text-center cursor-pointer hover:scale-105 transition-all border border-transparent hover:border-cyan-400">
                     <div class="text-7xl mb-6">${sub.icon}</div>
                     <h3 class="title-font text-3xl font-semibold mb-3">${sub.name}</h3>
                     <p class="text-cyan-300 text-sm">20 savol • 20 daqiqa</p>
