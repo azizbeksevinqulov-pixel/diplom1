@@ -6,20 +6,37 @@
     <title>INSTSU • Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> <!-- style.css ni qo'shdik -->
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
         * { font-family: 'Inter', system_ui, sans-serif; }
         .title-font { font-family: 'Space Grotesk', sans-serif; }
-
+        
         .glass {
             background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(28px);
             border: 1px solid rgba(103, 232, 249, 0.3);
         }
-
+        
         .sidebar {
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(20px);
+        }
+        
+        /* Active link uchun */
+        .sidebar a.active {
+            background-color: rgba(103, 232, 249, 0.15);
+            border-left: 4px solid rgb(103 232 249);
+            color: rgb(103 232 249);
+            font-weight: 600;
+        }
+        
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
         }
     </style>
 </head>
@@ -28,59 +45,64 @@
     <!-- Sidebar -->
     <div class="sidebar w-72 min-h-screen p-6 border-r border-slate-700 flex flex-col">
         <div class="flex items-center gap-3 mb-12">
-            <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-2xl flex items-center justify-center text-2xl">📘</div>
-            <div class="title-font text-3xl font-bold">INSTSU Admin</div>
+            <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-2xl flex items-center justify-center text-2xl shadow-lg">📘</div>
+            <div class="title-font text-3xl font-bold tracking-tight">INSTSU Admin</div>
         </div>
-
+        
         <div class="space-y-2 flex-1">
             <a href="#" onclick="showSection('dashboard')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all active">
-                <i class="fa-solid fa-chart-line"></i> Dashboard
+                <i class="fa-solid fa-chart-line"></i> 
+                <span>Dashboard</span>
             </a>
             <a href="#" onclick="showSection('students')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all">
-                <i class="fa-solid fa-users"></i> Talabalar
+                <i class="fa-solid fa-users"></i> 
+                <span>Talabalar</span>
             </a>
             <a href="#" onclick="showSection('results')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all">
-                <i class="fa-solid fa-chart-bar"></i> Natijalar
+                <i class="fa-solid fa-chart-bar"></i> 
+                <span>Natijalar</span>
             </a>
             <a href="#" onclick="showSection('ranking')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all">
-                <i class="fa-solid fa-trophy"></i> Reyting
+                <i class="fa-solid fa-trophy"></i> 
+                <span>Reyting</span>
             </a>
         </div>
 
         <button onclick="logout()" 
                 class="w-full py-4 bg-red-500/10 hover:bg-red-500 hover:text-white rounded-2xl flex items-center justify-center gap-3 text-sm font-medium transition-all mt-8">
-            <i class="fa-solid fa-right-from-bracket"></i> Chiqish
+            <i class="fa-solid fa-right-from-bracket"></i> 
+            Chiqish
         </button>
     </div>
 
     <!-- Main Content -->
-    <div class="flex-1 p-8">
-
+    <div class="flex-1 p-8 overflow-auto">
+        
         <!-- Dashboard -->
         <div id="dashboard" class="section active">
             <h1 class="title-font text-5xl font-bold mb-10">Admin Dashboard</h1>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="glass rounded-3xl p-8">
-                    <div class="text-5xl font-bold">248</div>
-                    <div class="text-slate-400">Jami talabalar</div>
+                    <div class="text-5xl font-bold text-cyan-400">248</div>
+                    <div class="text-slate-400 mt-2">Jami talabalar</div>
                 </div>
                 <div class="glass rounded-3xl p-8">
-                    <div class="text-5xl font-bold">124</div>
-                    <div class="text-slate-400">Bugun test topshirildi</div>
+                    <div class="text-5xl font-bold text-cyan-400">124</div>
+                    <div class="text-slate-400 mt-2">Bugun test topshirildi</div>
                 </div>
                 <div class="glass rounded-3xl p-8">
-                    <div class="text-5xl font-bold">87%</div>
-                    <div class="text-slate-400">O‘rtacha natija</div>
+                    <div class="text-5xl font-bold text-cyan-400">87%</div>
+                    <div class="text-slate-400 mt-2">O‘rtacha natija</div>
                 </div>
                 <div class="glass rounded-3xl p-8">
-                    <div class="text-5xl font-bold">12</div>
-                    <div class="text-slate-400">Faol foydalanuvchilar</div>
+                    <div class="text-5xl font-bold text-cyan-400">12</div>
+                    <div class="text-slate-400 mt-2">Faol foydalanuvchilar</div>
                 </div>
             </div>
         </div>
 
         <!-- Talabalar -->
-        <div id="students" class="section hidden">
+        <div id="students" class="section">
             <h2 class="title-font text-4xl font-bold mb-8">Talabalar ro‘yxati</h2>
             <div class="glass rounded-3xl overflow-hidden">
                 <table class="w-full">
@@ -89,7 +111,7 @@
                             <th class="px-8 py-5 text-left">Ism</th>
                             <th class="px-8 py-5 text-left">Kurs</th>
                             <th class="px-8 py-5 text-left">Email</th>
-                            <th class="px-8 py-5 text-center">Testlar</th>
+                            <th class="px-8 py-5 text-center">Testlar soni</th>
                             <th class="px-8 py-5 text-center">O‘rtacha ball</th>
                         </tr>
                     </thead>
@@ -99,16 +121,20 @@
         </div>
 
         <!-- Natijalar -->
-        <div id="results" class="section hidden">
+        <div id="results" class="section">
             <h2 class="title-font text-4xl font-bold mb-8">Barcha imtihon natijalari</h2>
-            <div id="resultsList" class="space-y-4"></div>
+            <div id="resultsList" class="space-y-4">
+                <!-- JavaScript orqali to'ldiriladi -->
+            </div>
         </div>
 
         <!-- Reyting -->
-        <div id="ranking" class="section hidden">
+        <div id="ranking" class="section">
             <h2 class="title-font text-4xl font-bold mb-8">Umumiy Reyting</h2>
             <div class="glass rounded-3xl p-12 text-center">
-                <p class="text-xl text-slate-400">Reyting jadvali (demo versiya)</p>
+                <i class="fa-solid fa-trophy text-6xl text-yellow-400 mb-6"></i>
+                <p class="text-2xl text-slate-300">Reyting jadvali (tez orada to‘liq versiya qo‘shiladi)</p>
+                <p class="text-slate-500 mt-4">Hozircha demo ma’lumotlar ko‘rsatilmoqda</p>
             </div>
         </div>
     </div>
@@ -118,20 +144,35 @@
             {name:"Azizbek Rahmanov", kurs:"3-kurs", email:"azizbek@instsu.uz", tests:15, avg:94},
             {name:"Madina Karimova", kurs:"4-kurs", email:"madina@instsu.uz", tests:18, avg:97},
             {name:"Shoxrux Juraev", kurs:"2-kurs", email:"shoxrux@instsu.uz", tests:10, avg:82},
+            {name:"Nigora Sobirova", kurs:"3-kurs", email:"nigora@instsu.uz", tests:12, avg:89},
         ];
 
         function showSection(section) {
-            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(section).classList.remove('hidden');
+            // Barcha sectionlarni yashirish
+            document.querySelectorAll('.section').forEach(s => {
+                s.classList.remove('active');
+            });
+            
+            // Tanlangan sectionni ko‘rsatish
+            const activeSection = document.getElementById(section);
+            if (activeSection) activeSection.classList.add('active');
+
+            // Sidebar linklarida active holatini yangilash
+            document.querySelectorAll('.sidebar a').forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('onclick').includes(`'${section}'`)) {
+                    a.classList.add('active');
+                }
+            });
         }
 
         function renderStudents() {
             const tbody = document.getElementById('studentsTable');
             tbody.innerHTML = demoStudents.map(s => `
-                <tr class="border-b border-slate-700 hover:bg-slate-800/50">
-                    <td class="px-8 py-6">${s.name}</td>
+                <tr class="border-b border-slate-700 hover:bg-slate-800/60 transition-colors">
+                    <td class="px-8 py-6 font-medium">${s.name}</td>
                     <td class="px-8 py-6">${s.kurs}</td>
-                    <td class="px-8 py-6">${s.email}</td>
+                    <td class="px-8 py-6 text-slate-300">${s.email}</td>
                     <td class="px-8 py-6 text-center">${s.tests}</td>
                     <td class="px-8 py-6 text-center font-bold text-cyan-400">${s.avg}%</td>
                 </tr>
@@ -145,15 +186,18 @@
             }
         }
 
+        // Sahifa yuklanganda
         window.onload = () => {
             const user = JSON.parse(localStorage.getItem('instsu_current_user'));
+            
             if (!user || user.role !== "admin") {
                 alert("Bu sahifaga faqat admin kirishi mumkin!");
                 window.location.href = "login.html";
                 return;
             }
+
             renderStudents();
-            showSection('dashboard');
+            showSection('dashboard'); // Default bo‘lim
         };
     </script>
 </body>
