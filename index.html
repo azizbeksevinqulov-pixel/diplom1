@@ -3,96 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TestZamon - Asosiy</title>
+    <title>INSTSU Test - Imtihon Tizimi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-slate-950 text-slate-200">
 
-    <!-- Navbar -->
+    <!-- NAVBAR -->
     <nav class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-3xl flex items-center justify-center text-3xl">📝</div>
-                <h1 class="text-3xl font-bold">TestZamon</h1>
+                <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-3xl flex items-center justify-center text-3xl">📘</div>
+                <h1 class="text-3xl font-bold">INSTSU Test</h1>
             </div>
-            
             <div class="flex items-center gap-6">
-                <div id="userInfo" onclick="showProfile()" class="flex items-center gap-3 cursor-pointer">
-                    <div id="userAvatar" class="w-9 h-9 bg-cyan-400 text-slate-900 rounded-2xl flex items-center justify-center font-bold"></div>
-                    <div>
-                        <span id="displayName" class="font-semibold"></span>
-                    </div>
+                <div onclick="showProfile()" class="flex items-center gap-3 cursor-pointer">
+                    <div id="userAvatar" class="w-9 h-9 bg-cyan-400 text-slate-900 rounded-2xl flex items-center justify-center font-bold text-xl"></div>
+                    <span id="displayName" class="font-semibold"></span>
                 </div>
-                <button onclick="logout()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-6 py-3 rounded-3xl text-sm font-medium flex items-center gap-2">
+                <button onclick="logout()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-6 py-3 rounded-3xl flex items-center gap-2 text-sm font-medium">
                     <i class="fa-solid fa-right-from-bracket"></i> Chiqish
                 </button>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-6 py-12">
-        <h1 class="text-5xl font-bold mb-4">Salom, <span id="welcomeName" class="text-cyan-400"></span>!</h1>
-        <p class="text-xl text-slate-400 mb-12">Fanlardan test topshirib, darhol natijangizni ko‘ring</p>
+    <!-- HOME -->
+    <div id="home" class="section max-w-7xl mx-auto px-6 py-12">
+        <h1 class="text-5xl font-bold mb-3">Salom, <span id="welcomeName" class="text-cyan-400"></span>!</h1>
+        <p class="text-xl text-slate-400">INSTSU fanlari bo‘yicha zamonaviy imtihon tizimi</p>
+        <button onclick="showSection('subjects')" class="mt-8 bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-semibold px-12 py-6 rounded-3xl text-xl flex items-center gap-4">
+            <i class="fa-solid fa-play"></i> TESTNI BOSHLASH
+        </button>
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="subjectsGrid">
-            <!-- JavaScript orqali to‘ldiriladi -->
+    <!-- FANLAR -->
+    <div id="subjects" class="section hidden max-w-7xl mx-auto px-6 py-12">
+        <h2 class="text-4xl font-bold mb-8">Fanlarni tanlang</h2>
+        <div id="subjectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quiz" class="section hidden max-w-4xl mx-auto px-6 py-12">
+        <div class="flex justify-between items-center mb-8">
+            <button onclick="exitQuiz()" class="flex items-center gap-2 text-slate-400 hover:text-white"><i class="fa-solid fa-arrow-left"></i> Orqaga</button>
+            <h2 id="quizSubjectName" class="text-3xl font-bold"></h2>
+            <div class="flex items-center gap-6">
+                <span id="timer" class="font-mono text-2xl font-semibold text-cyan-400">15:00</span>
+                <div>Savol <span id="currentQuestion" class="font-bold">1</span>/<span id="totalQuestions"></span></div>
+            </div>
+        </div>
+        <div class="h-3 bg-slate-800 rounded-3xl mb-10 overflow-hidden">
+            <div id="progressBar" class="h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-3xl transition-all" style="width:0%"></div>
+        </div>
+        <div id="questionText" class="text-2xl font-semibold mb-10"></div>
+        <div id="optionsContainer" class="space-y-4"></div>
+
+        <div class="flex justify-between mt-12">
+            <button onclick="prevQuestion()" id="prevBtn" class="px-8 py-4 border border-slate-600 rounded-3xl font-medium flex items-center gap-2">Oldingi</button>
+            <button onclick="nextQuestion()" id="nextBtn" class="px-8 py-4 bg-cyan-400 text-slate-900 rounded-3xl font-semibold flex items-center gap-2">Keyingi</button>
         </div>
     </div>
 
-    <!-- Quiz, Natija va boshqa bo‘limlar shu yerga qo‘shiladi (oldingi versiyadan) -->
-    <!-- Qo‘shimcha bo‘limlarni to‘liq qilish uchun oldingi kodni ham qo‘shing yoki kerak bo‘lsa ayting -->
+    <!-- NATIJA -->
+    <div id="testResult" class="section hidden max-w-2xl mx-auto px-6 py-12 text-center">
+        <div class="bg-slate-900 rounded-3xl p-12">
+            <div id="scoreCircle" class="mx-auto w-52 h-52 rounded-full border-8 border-cyan-400 flex items-center justify-center text-7xl font-bold mb-8"></div>
+            <h3 id="resultTitle" class="text-4xl font-bold mb-2"></h3>
+            <p id="resultSubtitle" class="text-slate-400 mb-8"></p>
+            <div class="flex gap-4 justify-center">
+                <button onclick="restartSameTest()" class="flex-1 py-6 bg-slate-800 rounded-3xl font-medium">Qayta topshirish</button>
+                <button onclick="saveAndGoHome()" class="flex-1 py-6 bg-cyan-400 text-slate-900 rounded-3xl font-semibold">Uyga qaytish</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         let currentUser = null;
+        let testHistory = [];
+
+        const subjectsData = [
+            {
+                id: 0,
+                name: "Axborot xavfsizligi",
+                icon: "🔒",
+                color: "bg-red-500",
+                questions: [
+                    { q: "Axborot xavfsizligining uchta asosiy tamoyili nima?", options: ["CIA triad", "AAA model", "TCP/IP", "OSI model"], answer: 0 },
+                    { q: "SSL/TLS protokoli nima uchun ishlatiladi?", options: ["Ma'lumotni shifrlash", "Tezlikni oshirish", "Fayl yuklab olish", "Viruslarni aniqlash"], answer: 0 },
+                    { q: "Firewall nima vazifani bajaradi?", options: ["Tarmoq trafigini filtrlash", "Parolni saqlash", "Ma'lumotni qayta ishlash", "Backup qilish"], answer: 0 }
+                ]
+            },
+            {
+                id: 1,
+                name: "Big Data",
+                icon: "📊",
+                color: "bg-green-500",
+                questions: [
+                    { q: "Big Data ning 5 ta asosiy xususiyati qaysi?", options: ["5V (Volume, Velocity, Variety, Veracity, Value)", "4P", "3C", "2A"], answer: 0 },
+                    { q: "Hadoop asosan qaysi maqsadda ishlatiladi?", options: ["Katta hajmdagi ma'lumotlarni saqlash va qayta ishlash", "Kichik bazalarni boshqarish", "Grafik dizayn", "Video montaj"], answer: 0 },
+                    { q: "Apache Spark nima uchun mashhur?", options: ["Tez hisoblash va real-time analytics", "Faqat saqlash uchun", "Parolni himoyalash", "Web-sayt yaratish"], answer: 0 }
+                ]
+            },
+            {
+                id: 2,
+                name: "Diskret matematika va RDB 2",
+                icon: "🔢",
+                color: "bg-purple-500",
+                questions: [
+                    { q: "Graf nazariyasida 'Euler tsikli' nima?", options: ["Har bir qirra bir marta o'tiladigan yopiq yo'l", "Eng qisqa yo'l", "Eng uzun yo'l", "Faqat bitta nuqtadan iborat"], answer: 0 },
+                    { q: "RDB 2 da 'Normalizatsiya' nima uchun kerak?", options: ["Ma'lumotlar takrorlanishini kamaytirish", "Tezlikni oshirish", "Fayl hajmini kamaytirish", "Parolni himoyalash"], answer: 0 },
+                    { q: "SQL da 'JOIN' operatori nima qiladi?", options: ["Ikki yoki undan ortiq jadvalni birlashtiradi", "Ma'lumot o'chiradi", "Yangi jadval yaratadi", "Indeks qo'shadi"], answer: 0 }
+                ]
+            },
+            {
+                id: 3,
+                name: "Identifikatsiyalash va evolyutsion modellashtirish",
+                icon: "🧬",
+                color: "bg-blue-500",
+                questions: [
+                    { q: "Evolyutsion algoritmlar asosida qanday muammolar yechiladi?", options: ["Optimallashtirish va qidiruv muammolari", "Oddiy hisob-kitoblar", "Matn terish", "Rasm chizish"], answer: 0 },
+                    { q: "Identifikatsiyalash tizimi nima?", options: ["Foydalanuvchini aniqlash va tasdiqlash", "Ma'lumot saqlash", "Internet tezligini o'lchash", "Fayl yuklash"], answer: 0 },
+                    { q: "Genetik algoritm qaysi turdagi modellashtirishga kiradi?", options: ["Evolyutsion modellashtirish", "Statik modellashtirish", "Lineer modellashtirish", "Fizik modellashtirish"], answer: 0 }
+                ]
+            }
+        ];
 
         function loadUser() {
-            const saved = localStorage.getItem('testzamon_current_user');
-            if (!saved) {
-                window.location.href = "login.html";
-                return;
-            }
+            const saved = localStorage.getItem('instsu_current_user');
+            if (!saved) return window.location.href = "login.html";
             currentUser = JSON.parse(saved);
-            
             document.getElementById('displayName').textContent = currentUser.fullName || currentUser.username;
             document.getElementById('welcomeName').textContent = currentUser.fullName ? currentUser.fullName.split(' ')[0] : currentUser.username;
             document.getElementById('userAvatar').textContent = (currentUser.fullName || currentUser.username)[0].toUpperCase();
+            testHistory = JSON.parse(localStorage.getItem('instsu_history_' + currentUser.username)) || [];
         }
-
-        function logout() {
-            if (confirm("Chiqishni xohlaysizmi?")) {
-                localStorage.removeItem('testzamon_current_user');
-                window.location.href = "login.html";
-            }
-        }
-
-        function showProfile() {
-            alert(`Ism: ${currentUser.fullName}\nUsername: ${currentUser.username}\nEmail: ${currentUser.email}\nSinfi: ${currentUser.class}`);
-        }
-
-        // Oddiy misol uchun fanlar
-        const subjects = [
-            { name: "Matematika", icon: "📐" },
-            { name: "Fizika", icon: "⚡" },
-            { name: "Kimyo", icon: "🧪" }
-        ];
 
         function renderSubjects() {
-            const container = document.getElementById('subjectsGrid');
-            container.innerHTML = subjects.map(s => `
-                <div onclick="startTest('${s.name}')" 
-                     class="bg-slate-900 border border-slate-700 hover:border-cyan-400 rounded-3xl p-8 cursor-pointer text-center">
-                    <div class="text-6xl mb-4">${s.icon}</div>
-                    <h3 class="text-2xl font-semibold">${s.name}</h3>
-                    <p class="text-slate-400 mt-2">Testni boshlash</p>
+            const grid = document.getElementById('subjectsGrid');
+            grid.innerHTML = subjectsData.map(sub => `
+                <div onclick="startQuiz(${sub.id})" class="card-hover bg-slate-900 border border-slate-700 hover:border-cyan-400 rounded-3xl p-8 cursor-pointer">
+                    <div class="${sub.color} w-16 h-16 rounded-2xl text-5xl flex items-center justify-center mx-auto mb-6">${sub.icon}</div>
+                    <h3 class="text-2xl font-semibold text-center">${sub.name}</h3>
+                    <p class="text-center text-slate-400 mt-2">${sub.questions.length} ta savol • 15 daqiqa</p>
                 </div>
             `).join('');
         }
 
-        function startTest(subject) {
-            alert(`${subject} fani bo‘yicha test boshlandi!\n\n(Bu yerda to‘liq test logikasi bo‘ladi)`);
-            // Bu yerga oldingi quiz kodini qo‘shishingiz mumkin
+        // Quiz logikasi (oldingi versiyadan to‘liq)
+        let currentSubjectIndex = 0, currentQuestions = [], currentAnswers = [], currentQuestionIndex = 0, timerInterval, timeLeft = 900;
+
+        function startQuiz(id) {
+            currentSubjectIndex = subjectsData.findIndex(s => s.id === id);
+            const subject = subjectsData[currentSubjectIndex];
+            currentQuestions = [...subject.questions];
+            currentAnswers = new Array(currentQuestions.length).fill(null);
+            currentQuestionIndex = 0;
+            timeLeft = 900;
+
+            document.getElementById('quizSubjectName').textContent = subject.name;
+            document.getElementById('totalQuestions').textContent = currentQuestions.length;
+            showSection('quiz');
+            renderCurrentQuestion();
+            startTimer();
+        }
+
+        function renderCurrentQuestion() {
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('questionText').innerHTML = `<span class="text-cyan-400">Savol ${currentQuestionIndex + 1}.</span> ${q.q}`;
+            
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = q.options.map((opt, i) => `
+                <div onclick="selectAnswer(${i})" class="option p-6 border ${currentAnswers[currentQuestionIndex] === i ? 'border-cyan-400 bg-cyan-400/10' : 'border-slate-700 hover:border-slate-400'} rounded-3xl cursor-pointer transition-all text-lg">
+                    <span class="font-bold mr-4">${String.fromCharCode(65 + i)}</span>${opt}
+                </div>
+            `).join('');
+
+            document.getElementById('prevBtn').style.display = currentQuestionIndex === 0 ? 'none' : 'flex';
+            document.getElementById('nextBtn').innerHTML = currentQuestionIndex === currentQuestions.length - 1 
+                ? `Topshirish <i class="fa-solid fa-paper-plane ml-2"></i>` 
+                : `Keyingi <i class="fa-solid fa-chevron-right ml-2"></i>`;
+            document.getElementById('progressBar').style.width = `${(currentQuestionIndex / currentQuestions.length) * 100}%`;
+        }
+
+        function selectAnswer(i) { currentAnswers[currentQuestionIndex] = i; renderCurrentQuestion(); }
+        function nextQuestion() {
+            if (currentQuestionIndex < currentQuestions.length - 1) {
+                currentQuestionIndex++;
+                renderCurrentQuestion();
+            } else finishTest();
+        }
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) { currentQuestionIndex--; renderCurrentQuestion(); }
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const min = Math.floor(timeLeft / 60);
+                const sec = timeLeft % 60;
+                document.getElementById('timer').textContent = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+                if (timeLeft <= 0) finishTest();
+            }, 1000);
+        }
+
+        function finishTest() {
+            clearInterval(timerInterval);
+            const subject = subjectsData[currentSubjectIndex];
+            let correct = 0;
+            currentQuestions.forEach((q, i) => { if (currentAnswers[i] === q.answer) correct++; });
+
+            const percent = Math.round((correct / currentQuestions.length) * 100);
+
+            const result = { id: Date.now(), date: new Date().toLocaleDateString('uz-UZ'), subject: subject.name, score: correct, max: currentQuestions.length, percent: percent };
+            testHistory.unshift(result);
+            localStorage.setItem('instsu_history_' + currentUser.username, JSON.stringify(testHistory));
+
+            document.getElementById('scoreCircle').innerHTML = `<div class="text-8xl font-bold text-cyan-400">${percent}<span class="text-3xl">%</span></div>`;
+            document.getElementById('resultTitle').textContent = percent >= 80 ? "A'lo! 🎉" : percent >= 60 ? "Yaxshi! 👍" : "Yana urinib ko‘ring!";
+            document.getElementById('resultSubtitle').innerHTML = `${subject.name} fanidan <b>${correct}/${currentQuestions.length}</b> ball`;
+            showSection('testResult');
+        }
+
+        function restartSameTest() { startQuiz(subjectsData[currentSubjectIndex].id); }
+        function saveAndGoHome() { showSection('home'); }
+        function exitQuiz() {
+            if (confirm("Testni tark etmoqchimisiz?")) {
+                clearInterval(timerInterval);
+                showSection('subjects');
+            }
+        }
+
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(section).classList.remove('hidden');
+            if (section === 'subjects') renderSubjects();
+        }
+
+        function showProfile() {
+            alert(`👤 ${currentUser.fullName}\n📧 ${currentUser.email}\n🏫 ${currentUser.class}\n📅 Ro‘yxatdan o‘tgan: ${new Date(currentUser.createdAt).toLocaleDateString('uz-UZ')}`);
+        }
+
+        function logout() {
+            if (confirm("Chiqishni tasdiqlaysizmi?")) {
+                localStorage.removeItem('instsu_current_user');
+                window.location.href = "login.html";
+            }
         }
 
         window.onload = () => {
