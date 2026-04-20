@@ -1,272 +1,99 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INSTSU • Imtihon</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-        * { font-family: 'Inter', system_ui, sans-serif; }
-        .title-font { font-family: 'Space Grotesk', sans-serif; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Imtihon Savollari</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-black text-slate-200 min-h-screen">
-
-    <!-- Navbar -->
-    <nav class="bg-slate-900/95 border-b border-slate-700/50 sticky top-0 z-50 backdrop-blur-2xl">
-        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-11 h-11 bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center text-4xl">📘</div>
-                <div class="title-font text-3xl font-bold tracking-tighter">INSTSU</div>
-            </div>
-            <button onclick="logout()" class="px-6 py-3 bg-red-500/10 hover:bg-red-500 hover:text-white rounded-3xl flex items-center gap-2 text-sm font-medium">
-                <i class="fa-solid fa-right-from-bracket"></i> Chiqish
-            </button>
-        </div>
-    </nav>
-
-    <div class="max-w-4xl mx-auto px-6 py-10">
-
-        <!-- Fan tanlash ekrani -->
-        <div id="subjectScreen">
-            <h1 class="title-font text-5xl font-bold text-center mb-4">Imtihon fanini tanlang</h1>
-            <p class="text-center text-slate-400 mb-12">Har bir fanda 20 ta savol • Natijalar saqlanadi</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div onclick="startTest('Axborot xavfsizligi')" class="glass rounded-3xl p-8 text-center card-hover cursor-pointer hover:scale-105 transition-all">
-                    <div class="text-6xl mb-6">🔒</div>
-                    <h3 class="text-2xl font-bold">Axborot xavfsizligi</h3>
-                    <p class="text-slate-400 mt-2">20 savol</p>
-                </div>
-                <div onclick="startTest('Big Data')" class="glass rounded-3xl p-8 text-center card-hover cursor-pointer hover:scale-105 transition-all">
-                    <div class="text-6xl mb-6">📊</div>
-                    <h3 class="text-2xl font-bold">Big Data</h3>
-                    <p class="text-slate-400 mt-2">20 savol</p>
-                </div>
-                <div onclick="startTest('Xorijiy til')" class="glass rounded-3xl p-8 text-center card-hover cursor-pointer hover:scale-105 transition-all">
-                    <div class="text-6xl mb-6">🌍</div>
-                    <h3 class="text-2xl font-bold">Xorijiy til (Ingliz tili)</h3>
-                    <p class="text-slate-400 mt-2">20 savol</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Test ekrani -->
-        <div id="testScreen" class="hidden">
-            <div class="glass rounded-3xl p-8 mb-8">
-                <div class="flex justify-between items-center">
-                    <h2 id="subjectTitle" class="title-font text-3xl font-bold"></h2>
-                    <div class="text-right">
-                        <div id="progressText" class="text-4xl font-bold text-cyan-400">1/20</div>
-                        <div class="text-xs text-slate-400">savol</div>
-                    </div>
-                </div>
-                <div class="h-2 bg-slate-700 rounded-full mt-6 overflow-hidden">
-                    <div id="progressBar" class="progress-bar h-full bg-gradient-to-r from-cyan-400 to-purple-500 w-1/20"></div>
-                </div>
-            </div>
-
-            <div id="questionCard" class="glass rounded-3xl p-10"></div>
-
-            <div class="flex justify-between mt-8">
-                <button onclick="prevQuestion()" id="prevBtn" 
-                        class="flex items-center gap-3 px-8 py-4 bg-slate-800 hover:bg-slate-700 rounded-3xl disabled:opacity-50 transition-all">
-                    <i class="fa-solid fa-arrow-left"></i> Oldingi
-                </button>
-                <button onclick="nextQuestion()" id="nextBtn"
-                        class="flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 font-bold rounded-3xl transition-all hover:scale-105">
-                    <span id="nextText">Keyingi savol</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
-        </div>
+<body class="bg-gradient-to-r from-gray-900 via-purple-900 to-indigo-900 min-h-screen text-white font-[Space Grotesk]">
+  <div class="p-10">
+    <h1 class="text-3xl mb-6">Imtihon</h1>
+    <div id="subjectSelect" class="grid md:grid-cols-3 gap-6">
+      <div onclick="startExam('Axborot xavfsizligi')" class="cursor-pointer bg-white/10 p-6 rounded-xl hover:scale-105 transition">Axborot xavfsizligi</div>
+      <div onclick="startExam('Big Data')" class="cursor-pointer bg-white/10 p-6 rounded-xl hover:scale-105 transition">Big Data</div>
+      <div onclick="startExam('Xorijiy til')" class="cursor-pointer bg-white/10 p-6 rounded-xl hover:scale-105 transition">Xorijiy til</div>
     </div>
 
-    <script>
-        let currentSubject = "";
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let currentUser = JSON.parse(localStorage.getItem('instsu_current_user')) || {};
+    <div id="examArea" class="hidden">
+      <div class="flex justify-between mb-4">
+        <div id="timer">20:00</div>
+        <div class="w-1/2 bg-gray-700 rounded-full">
+          <div id="progress" class="bg-cyan-500 h-3 rounded-full" style="width:0%"></div>
+        </div>
+      </div>
+      <div id="questionBox" class="bg-white/10 p-6 rounded-xl"></div>
+    </div>
 
-        // ==================== 20 SAVOL HAR BIR FAN UCHUN ====================
+    <div id="resultArea" class="hidden text-center">
+      <h2 class="text-3xl mb-4">Natija</h2>
+      <p id="score"></p>
+    </div>
+  </div>
 
-        const questionsDB = {
-            "Axborot xavfsizligi": [
-                {q: "Ma'lumotni himoya qilishning asosiy maqsadi nima?", options: ["Tezlikni oshirish", "Maxfiylik va xavfsizlikni ta'minlash", "Narxni pasaytirish", "Internet tezligini oshirish"], correct: 1},
-                {q: "Phishing hujumi qanday amalga oshiriladi?", options: ["Virus yuklash orqali", "Soxta sayt va email orqali", "Wi-Fi buzish orqali", "Kompyuterni o'g'irlash orqali"], correct: 1},
-                {q: "CIA triadida 'C' nimani bildiradi?", options: ["Confidentiality (Maxfiylik)", "Control", "Connection", "Cost"], correct: 0},
-                {q: "Eng kuchli parol yaratish usuli qaysi?", options: ["Tug'ilgan sana", "Harflar + raqamlar + maxsus belgilar", "Faqat ism", "123456"], correct: 1},
-                {q: "Firewall nima uchun ishlatiladi?", options: ["Ma'lumotni shifrlash", "Tarmoq trafigini filtrlash", "Viruslarni o'chirish", "Fayllarni zaxiralash"], correct: 1},
-                {q: "Malware qanday turga kiradi?", options: ["Virus, Worm, Trojan", "Only Virus", "Only Firewall", "Only Password"], correct: 0},
-                {q: "Two-Factor Authentication (2FA) nima?", options: ["Ikki xil parol", "Parol + qo'shimcha tasdiqlash (SMS, app)", "Faqat email", "Faqat PIN"], correct: 1},
-                {q: "SQL Injection qanday hujum?", options: ["Ma'lumotlar bazasiga zarar yetkazish", "Saytni sekinlashtirish", "Parolni o'g'irlash", "Fayl yuklash"], correct: 0},
-                {q: "HTTPS nima beradi?", options: ["Tezlik", "Shifrlangan aloqa", "Bepul internet", "Katta hajm"], correct: 1},
-                {q: "Zero-Day vulnerability nima?", options: ["Yangi topilgan, hali tuzatilmagan zaiflik", "Eski virus", "Antivirus", "Parol"], correct: 0},
-                {q: "Ransomware nima qiladi?", options: ["Fayllarni shifrlab, to'lov talab qiladi", "Kompyuterni o'chiradi", "Internetni uzadi", "Parolni o'zgartiradi"], correct: 0},
-                {q: "Backup qilishning maqsadi nima?", options: ["Ma'lumotni yo'qotmaslik", "Tezlikni oshirish", "Virusdan himoya", "Internet tezligi"], correct: 0},
-                {q: "Social Engineering nima?", options: ["Insonni aldab ma'lumot olish", "Kompyuter hujumi", "Antivirus", "Firewall"], correct: 0},
-                {q: "Strong password misoli?", options: ["P@ssw0rd2026!", "123456", "admin", "qwerty"], correct: 0},
-                {q: "VPN nima uchun ishlatiladi?", options: ["Internetni xavfsiz qilish", "Tezlikni oshirish", "Fayl yuklash", "O'yin o'ynash"], correct: 0},
-                {q: "DDoS hujumi nima?", options: ["Saytni ko'p so'rov bilan to'xtatish", "Parol o'g'irlash", "Virus tarqatish", "Fayl o'chirish"], correct: 0},
-                {q: "Encryption nima?", options: ["Ma'lumotni shifrlash", "O'chirish", "Tezlashtirish", "Saqlash"], correct: 0},
-                {q: "Antivirus dasturining asosiy vazifasi?", options: ["Viruslarni aniqlash va tozalash", "Internet tezligini oshirish", "Fayllarni zaxiralash", "Parol yaratish"], correct: 0},
-                {q: "GDPR nima?", options: ["Yevropa ma'lumotlar himoyasi qonuni", "O'zbekiston qonuni", "Antivirus nomi", "Kompyuter modeli"], correct: 0},
-                {q: "Brute Force Attack nima?", options: ["Parolni taxmin qilib sinash", "Virus tarqatish", "Saytni buzish", "Email yuborish"], correct: 0}
-            ],
+  <script>
+    let questions = [];
+    let current = 0;
+    let correct = 0;
+    let timer;
+    let timeLeft = 1200; // 20 min
 
-            "Big Data": [
-                {q: "Big Data ning 3V si nimalardan iborat?", options: ["Volume, Velocity, Variety", "Value, Vision, Version", "Voice, Video, Visual", "Volume, Value, Velocity"], correct: 0},
-                {q: "Hadoop nima uchun ishlatiladi?", options: ["Katta hajmdagi ma'lumotlarni qayta ishlash", "Kichik fayllar", "Grafika", "O'yin"], correct: 0},
-                {q: "HDFS nima?", options: ["Hadoop Distributed File System", "High Definition File", "Hyper Data File", "Host Data System"], correct: 0},
-                {q: "MapReduce ning asosiy maqsadi nima?", options: ["Katta ma'lumotlarni parallel qayta ishlash", "Ma'lumot saqlash", "Tezlikni oshirish", "Grafika yaratish"], correct: 0},
-                {q: "NoSQL bazalar nima uchun kerak?", options: ["Strukturasiz katta ma'lumotlar uchun", "Faqat kichik ma'lumotlar", "Faqat SQL", "Parol saqlash"], correct: 0},
-                {q: "Spark nima?", options: ["Tez Big Data ishlov berish framework", "Oddiy dastur", "Antivirus", "Browser"], correct: 0},
-                {q: "Data Lake nima?", options: ["Barcha turdagi ma'lumotni saqlash joyi", "Faqat strukturali ma'lumot", "Kichik baza", "Email server"], correct: 0},
-                {q: "Volume (hajm) Big Data da nimani bildiradi?", options: ["Juda katta hajmdagi ma'lumot", "Tezlik", "Turli xillik", "Qiymat"], correct: 0},
-                {q: "Velocity nima?", options: ["Ma'lumotning tez kelishi", "Hajm", "Turli xillik", "Saqlash"], correct: 0},
-                {q: "Variety nima?", options: ["Turli formatdagi ma'lumot (strukturali, yarim, strukturasiz)", "Hajm", "Tezlik", "Narx"], correct: 0},
-                {q: "Big Data Analytics ning asosiy maqsadi?", options: ["Yashirin naqshlarni topish", "Ma'lumot o'chirish", "Fayl saqlash", "Internet tezligi"], correct: 0},
-                {q: "Apache Kafka nima uchun ishlatiladi?", options: ["Real-time data streaming", "Oddiy fayl saqlash", "Grafika", "Parol"], correct: 0},
-                {q: "Data Warehouse va Data Lake farqi nima?", options: ["Warehouse - strukturali, Lake - barcha turdagi", "Ikkitasi bir xil", "Faqat kichik ma'lumot", "Faqat tezlik"], correct: 0},
-                {q: "Machine Learning Big Data da qanday qo'llaniladi?", options: ["Bashorat qilish va naqsh topish", "Fayl o'chirish", "Internet ochish", "Parol yaratish"], correct: 0},
-                {q: "MongoDB qanday turdagi baza?", options: ["NoSQL", "SQL", "Excel", "Word"], correct: 0},
-                {q: "Pig va Hive nima?", options: ["Hadoop ustidagi yuqori darajali tillar", "Oddiy dasturlar", "Antivirus", "Browser"], correct: 0},
-                {q: "Veracity Big Data da nimani bildiradi?", options: ["Ma'lumotning ishonchliligi", "Hajm", "Tezlik", "Turli xillik"], correct: 0},
-                {q: "Big Data ning afzalligi nima?", options: ["Yaxshi qaror qabul qilish", "Qimmat", "Sekin", "Kichik hajm"], correct: 0},
-                {q: "YARN nima?", options: ["Hadoop ning resurs boshqaruvi", "Fayl tizimi", "Ma'lumot bazasi", "Tezlik"], correct: 0},
-                {q: "Big Data loyihalarida eng katta muammo nima?", options: ["Ma'lumot sifati va hajmi", "Internet tezligi", "Kompyuter narxi", "Parol"], correct: 0}
-            ],
+    function startExam(subject) {
+      document.getElementById("subjectSelect").classList.add("hidden");
+      document.getElementById("examArea").classList.remove("hidden");
+      generateQuestions(subject);
+      showQuestion();
+      startTimer();
+    }
 
-            "Xorijiy til": [
-                {q: "This is _____ apple.", options: ["a", "an", "the", "some"], correct: 1},
-                {q: "She _____ to school every day.", options: ["go", "goes", "going", "went"], correct: 1},
-                {q: "I have been living here _____ five years.", options: ["for", "since", "from", "at"], correct: 0},
-                {q: "What is the past tense of 'go'?", options: ["goed", "went", "gone", "go"], correct: 1},
-                {q: "This book is _____ than that one.", options: ["more interesting", "interestinger", "most interesting", "interesting"], correct: 0},
-                {q: "I _____ my homework yesterday.", options: ["do", "did", "done", "doing"], correct: 1},
-                {q: "She is the _____ student in the class.", options: ["best", "better", "good", "well"], correct: 0},
-                {q: "If it rains, we _____ stay at home.", options: ["will", "would", "shall", "should"], correct: 0},
-                {q: "How _____ money do you have?", options: ["much", "many", "few", "little"], correct: 0},
-                {q: "I enjoy _____ books in my free time.", options: ["reading", "to read", "read", "reads"], correct: 0},
-                {q: "They have lived here _____ 2015.", options: ["since", "for", "from", "at"], correct: 0},
-                {q: "This is the house _____ I was born.", options: ["where", "which", "who", "when"], correct: 0},
-                {q: "She speaks English _____ than me.", options: ["better", "best", "good", "well"], correct: 0},
-                {q: "I _____ go to the cinema if I finish my work.", options: ["will", "would", "can", "may"], correct: 0},
-                {q: "There are _____ apples on the table.", options: ["a few", "a little", "much", "any"], correct: 0},
-                {q: "He is interested _____ learning English.", options: ["in", "on", "at", "to"], correct: 0},
-                {q: "What _____ you do last weekend?", options: ["did", "do", "does", "done"], correct: 0},
-                {q: "This is _____ most beautiful city I have ever seen.", options: ["the", "a", "an", "some"], correct: 0},
-                {q: "I wish I _____ richer.", options: ["were", "was", "am", "be"], correct: 0},
-                {q: "She asked me where _____ .", options: ["I lived", "do I live", "I live", "am I living"], correct: 0}
-            ]
-        };
+    function generateQuestions(subject) {
+      questions = [];
+      for (let i=1; i<=20; i++) {
+        questions.push({
+          q: subject + " savol " + i,
+          options: ["Variant A","Variant B","Variant C","Variant D"],
+          answer: 0
+        });
+      }
+    }
 
-        function startTest(subject) {
-            currentSubject = subject;
-            currentQuestionIndex = 0;
-            userAnswers = new Array(questionsDB[subject].length).fill(null);
-            
-            document.getElementById('subjectScreen').classList.add('hidden');
-            document.getElementById('testScreen').classList.remove('hidden');
-            
-            document.getElementById('subjectTitle').textContent = subject;
-            renderQuestion();
-        }
+    function showQuestion() {
+      if (current >= questions.length) {
+        finishExam();
+        return;
+      }
+      const q = questions[current];
+      let html = `<h3 class="text-xl mb-4">${q.q}</h3>`;
+      q.options.forEach((opt,i)=>{
+        html += `<div onclick="choose(${i})" class="cursor-pointer bg-white/20 p-3 rounded-lg mb-2 hover:bg-cyan-600 transition">${opt}</div>`;
+      });
+      document.getElementById("questionBox").innerHTML = html;
+      document.getElementById("progress").style.width = ((current/questions.length)*100)+"%";
+    }
 
-        function renderQuestion() {
-            const questions = questionsDB[currentSubject];
-            const q = questions[currentQuestionIndex];
-            
-            document.getElementById('progressText').textContent = `${currentQuestionIndex + 1}/${questions.length}`;
-            document.getElementById('progressBar').style.width = `${((currentQuestionIndex + 1) / questions.length) * 100}%`;
+    function choose(i) {
+      if (i===questions[current].answer) correct++;
+      current++;
+      setTimeout(showQuestion,900);
+    }
 
-            let html = `<h2 class="text-2xl font-medium mb-10 leading-relaxed">${q.q}</h2>`;
-            html += `<div class="space-y-4">`;
-            
-            q.options.forEach((opt, i) => {
-                html += `
-                <div onclick="selectAnswer(${i})" 
-                     class="option p-6 rounded-2xl border border-slate-600 cursor-pointer flex items-center gap-4 text-lg ${userAnswers[currentQuestionIndex] === i ? 'selected' : ''}">
-                    <span class="w-8 h-8 rounded-xl border-2 border-slate-500 flex items-center justify-center font-bold text-cyan-400 flex-shrink-0">
-                        ${String.fromCharCode(65 + i)}
-                    </span>
-                    <span>${opt}</span>
-                </div>`;
-            });
-            html += `</div>`;
-            
-            document.getElementById('questionCard').innerHTML = html;
+    function finishExam() {
+      document.getElementById("examArea").classList.add("hidden");
+      document.getElementById("resultArea").classList.remove("hidden");
+      const percent = Math.round((correct/questions.length)*100);
+      const grade = percent>=90?"A":percent>=75?"B":percent>=60?"C":"F";
+      document.getElementById("score").innerText = `Foiz: ${percent}% | Baho: ${grade}`;
+      localStorage.setItem("lastResult", percent);
+    }
 
-            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
-            document.getElementById('nextText').textContent = 
-                (currentQuestionIndex === questions.length - 1) ? "Testni yakunlash" : "Keyingi savol";
-        }
-
-        function selectAnswer(index) {
-            userAnswers[currentQuestionIndex] = index;
-            renderQuestion();
-        }
-
-        function nextQuestion() {
-            const questions = questionsDB[currentSubject];
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                renderQuestion();
-            } else {
-                finishTest();
-            }
-        }
-
-        function prevQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                renderQuestion();
-            }
-        }
-
-        function finishTest() {
-            const questions = questionsDB[currentSubject];
-            let correctCount = 0;
-            userAnswers.forEach((ans, i) => {
-                if (ans === questions[i].correct) correctCount++;
-            });
-
-            const percentage = Math.round((correctCount / questions.length) * 100);
-
-            // Natijani saqlash
-            let results = JSON.parse(localStorage.getItem('instsu_results')) || [];
-            results.push({
-                username: currentUser.username || "unknown",
-                fullName: currentUser.fullName || currentUser.username,
-                subject: currentSubject,
-                score: correctCount,
-                total: questions.length,
-                percentage: percentage,
-                date: new Date().toLocaleString('uz-UZ')
-            });
-            localStorage.setItem('instsu_results', JSON.stringify(results));
-
-            alert(`🎉 Test tugadi!\n\nFan: ${currentSubject}\nNatija: ${correctCount}/${questions.length} (${percentage}%)\n\nNatijangiz saqlandi!`);
-            window.location.href = "index.html";
-        }
-
-        function logout() {
-            if (confirm("Chiqishni xohlaysizmi? Javoblaringiz saqlanmaydi.")) {
-                localStorage.removeItem('instsu_current_user');
-                window.location.href = "login.html";
-            }
-        }
-
-        window.onload = () => {
-            if (!currentUser.username) {
-                alert("Iltimos, avval tizimga kiring!");
-                window.location.href = "login.html";
-            }
-        };
-    </script>
+    function startTimer() {
+      timer = setInterval(()=>{
+        timeLeft--;
+        let min = Math.floor(timeLeft/60);
+        let sec = timeLeft%60;
+        document.getElementById("timer").innerText = `${min}:${sec<10?"0":""}${sec}`;
+        if (timeLeft<=0) finishExam();
+      },1000);
+    }
+  </script>
 </body>
 </html>
