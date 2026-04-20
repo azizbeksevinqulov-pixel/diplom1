@@ -35,22 +35,18 @@
     <div class="flex-1 p-10">
         <div id="dashboard" class="section active">
             <h1 class="title-font text-5xl font-bold mb-10">Admin Dashboard</h1>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="glass rounded-3xl p-8 text-center">
-                    <div class="text-5xl font-bold text-cyan-400">248</div>
+                    <div class="text-5xl font-bold text-cyan-400">1</div>
                     <div class="text-slate-400 mt-2">Jami talabalar</div>
                 </div>
                 <div class="glass rounded-3xl p-8 text-center">
-                    <div class="text-5xl font-bold text-cyan-400">156</div>
+                    <div class="text-5xl font-bold text-cyan-400" id="totalTests">0</div>
                     <div class="text-slate-400 mt-2">Topshirilgan testlar</div>
                 </div>
                 <div class="glass rounded-3xl p-8 text-center">
-                    <div class="text-5xl font-bold text-cyan-400">89%</div>
-                    <div class="text-slate-400 mt-2">O‘rtacha natija</div>
-                </div>
-                <div class="glass rounded-3xl p-8 text-center">
-                    <div class="text-5xl font-bold text-cyan-400">24</div>
-                    <div class="text-slate-400 mt-2">Bugungi faol</div>
+                    <div class="text-5xl font-bold text-cyan-400" id="avgScore">0</div>
+                    <div class="text-slate-400 mt-2">O‘rtacha ball</div>
                 </div>
             </div>
         </div>
@@ -61,19 +57,12 @@
         </div>
 
         <div id="results" class="section hidden">
-            <h2 class="title-font text-4xl font-bold mb-8">Barcha natijalar</h2>
+            <h2 class="title-font text-4xl font-bold mb-8">Barcha test natijalari</h2>
             <div id="resultsList" class="space-y-4"></div>
         </div>
     </div>
 
     <script>
-        const demoStudents = [
-            {name:"Azizbek Rahmanov", kurs:"3-kurs", tests:5, avg:92},
-            {name:"Madina Karimova", kurs:"4-kurs", tests:8, avg:96},
-            {name:"Shoxrux Juraev", kurs:"2-kurs", tests:3, avg:81},
-            {name:"Sardor Alimov", kurs:"1-kurs", tests:4, avg:88}
-        ];
-
         function showSection(section) {
             document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
             document.getElementById(section).classList.remove('hidden');
@@ -82,21 +71,34 @@
         }
 
         function renderStudents() {
-            let html = `<table class="w-full"><thead class="bg-slate-800"><tr><th class="px-8 py-5 text-left">Ism</th><th class="px-8 py-5 text-left">Kurs</th><th class="px-8 py-5 text-center">Testlar</th><th class="px-8 py-5 text-center">O‘rtacha ball</th></tr></thead><tbody>`;
-            demoStudents.forEach(s => {
-                html += `<tr class="border-b border-slate-700"><td class="px-8 py-6">${s.name}</td><td class="px-8 py-6">${s.kurs}</td><td class="px-8 py-6 text-center">${s.tests}</td><td class="px-8 py-6 text-center font-bold text-cyan-400">${s.avg}%</td></tr>`;
-            });
+            let html = `<table class="w-full"><thead class="bg-slate-800"><tr><th class="px-8 py-5 text-left">Ism</th><th class="px-8 py-5 text-left">Kurs</th><th class="px-8 py-5 text-center">Testlar soni</th></tr></thead><tbody>`;
+            html += `<tr class="border-b border-slate-700"><td class="px-8 py-6">Azizbek Rahmanov</td><td class="px-8 py-6">3-kurs</td><td class="px-8 py-6 text-center" id="testCount">0</td></tr>`;
             html += `</tbody></table>`;
             document.getElementById('studentsTable').innerHTML = html;
         }
 
         function renderResults() {
+            const history = JSON.parse(localStorage.getItem('testHistory') || '[]');
             let html = `<div class="space-y-4">`;
-            demoStudents.forEach(s => {
-                html += `<div class="glass rounded-3xl p-8 flex justify-between items-center"><div><div class="font-semibold">${s.name}</div><div class="text-sm text-slate-400">${s.kurs}</div></div><div class="text-right"><div class="text-4xl font-bold text-cyan-400">${s.avg}%</div><div class="text-sm">${s.tests} ta test</div></div></div>`;
-            });
+            if (history.length === 0) {
+                html += `<p class="text-center text-slate-400 py-12">Hali hech qanday test topshirilmagan</p>`;
+            } else {
+                history.forEach((item, index) => {
+                    html += `<div class="glass rounded-3xl p-8 flex justify-between">
+                        <div>
+                            <div class="font-semibold">Azizbek Rahmanov</div>
+                            <div class="text-sm text-slate-400">${item.date}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-4xl font-bold text-cyan-400">${item.percent}%</div>
+                            <div class="text-sm">${item.score} / 20 ball</div>
+                        </div>
+                    </div>`;
+                });
+            }
             html += `</div>`;
             document.getElementById('resultsList').innerHTML = html;
+            document.getElementById('testCount').textContent = history.length;
         }
 
         function logout() {
@@ -112,6 +114,7 @@
                 alert("Bu sahifaga faqat admin kirishi mumkin!");
                 window.location.href = "login.html";
             }
+            renderResults();
         };
     </script>
 </body>
