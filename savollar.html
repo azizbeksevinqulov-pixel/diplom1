@@ -25,12 +25,10 @@
                 <i class="fa-solid fa-arrow-left text-2xl"></i>
                 <span class="font-medium">Asosiy sahifaga</span>
             </button>
-            <div class="title-font text-3xl font-bold text-cyan-400">Imtihon</div>
+            <div class="title-font text-3xl font-bold text-cyan-400">Imtihon - Axborot xavfsizligi</div>
         </div>
 
         <div class="glass rounded-3xl p-10 mb-10">
-            <h2 id="quizSubjectName" class="title-font text-4xl font-semibold text-center mb-8">Axborot xavfsizligi</h2>
-            
             <div class="flex justify-between items-center mb-8">
                 <div class="bg-slate-900 px-6 py-3 rounded-3xl">
                     <span id="timer" class="font-mono text-3xl font-bold text-cyan-400">20:00</span>
@@ -49,8 +47,10 @@
             <div id="optionsContainer" class="space-y-6"></div>
 
             <div class="flex justify-between mt-16">
-                <button onclick="prevQuestion()" id="prevBtn" class="px-12 py-6 border border-slate-600 hover:border-cyan-400 rounded-3xl font-medium text-lg">◀ Oldingi</button>
-                <button onclick="nextQuestion()" id="nextBtn" class="px-16 py-6 bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 font-semibold rounded-3xl text-lg">Keyingi ▶</button>
+                <button onclick="prevQuestion()" id="prevBtn" 
+                        class="px-12 py-6 border border-slate-600 hover:border-cyan-400 rounded-3xl font-medium text-lg">◀ Oldingi</button>
+                <button onclick="nextQuestion()" id="nextBtn" 
+                        class="px-16 py-6 bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 font-semibold rounded-3xl text-lg">Keyingi ▶</button>
             </div>
         </div>
     </div>
@@ -161,12 +161,7 @@
             history.unshift(result);
             localStorage.setItem('testHistory', JSON.stringify(history));
 
-            document.getElementById('scoreCircle').innerHTML = `<span class="text-cyan-400">${percent}</span><span class="text-4xl text-slate-400">%</span>`;
-            document.getElementById('resultTitle').textContent = percent >= 85 ? "Ajoyib natija! 🎉" : percent >= 70 ? "Yaxshi natija!" : "Yana urinib ko‘ring";
-            document.getElementById('resultSubtitle').innerHTML = `Axborot xavfsizligi<br><span class="text-2xl">${correct} / 20 ball</span>`;
-
-            // Natija sahifasini ko‘rsatish (oddiy alert bilan)
-            alert(`Test yakunlandi!\nBall: ${correct}/20 (${percent}%)`);
+            alert(`Test yakunlandi!\nTo‘g‘ri javoblar: ${correct} ta\nNatija: ${percent}%`);
             window.location.href = "index.html";
         }
 
