@@ -1,3 +1,118 @@
 <!DOCTYPE html>
 <html lang="uz">
-<head
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTSU • Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        * { font-family: 'Inter', system_ui, sans-serif; }
+        .title-font { font-family: 'Space Grotesk', sans-serif; }
+        .glass { background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(28px); border: 1px solid rgba(103, 232, 249, 0.3); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-950 to-black text-slate-200 flex min-h-screen">
+
+    <div class="w-72 min-h-screen p-6 border-r border-slate-700 bg-slate-900/95 flex flex-col">
+        <div class="flex items-center gap-3 mb-12">
+            <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-2xl flex items-center justify-center text-2xl">📘</div>
+            <div class="title-font text-3xl font-bold">INSTSU Admin</div>
+        </div>
+
+        <div class="space-y-2 flex-1">
+            <a onclick="showSection('dashboard')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all">Dashboard</a>
+            <a onclick="showSection('students')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all">Talabalar</a>
+            <a onclick="showSection('results')" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-cyan-400/10 transition-all">Natijalar</a>
+        </div>
+
+        <button onclick="logout()" class="w-full py-4 bg-red-500/10 hover:bg-red-500 hover:text-white rounded-2xl flex items-center justify-center gap-3 mt-8">
+            <i class="fa-solid fa-right-from-bracket"></i> Chiqish
+        </button>
+    </div>
+
+    <div class="flex-1 p-10">
+        <div id="dashboard" class="section active">
+            <h1 class="title-font text-5xl font-bold mb-10">Admin Dashboard</h1>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="glass rounded-3xl p-8 text-center">
+                    <div class="text-5xl font-bold text-cyan-400">248</div>
+                    <div class="text-slate-400 mt-2">Jami talabalar</div>
+                </div>
+                <div class="glass rounded-3xl p-8 text-center">
+                    <div class="text-5xl font-bold text-cyan-400">156</div>
+                    <div class="text-slate-400 mt-2">Topshirilgan testlar</div>
+                </div>
+                <div class="glass rounded-3xl p-8 text-center">
+                    <div class="text-5xl font-bold text-cyan-400">89%</div>
+                    <div class="text-slate-400 mt-2">O‘rtacha natija</div>
+                </div>
+                <div class="glass rounded-3xl p-8 text-center">
+                    <div class="text-5xl font-bold text-cyan-400">24</div>
+                    <div class="text-slate-400 mt-2">Bugungi faol</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="students" class="section hidden">
+            <h2 class="title-font text-4xl font-bold mb-8">Talabalar ro‘yxati</h2>
+            <div id="studentsTable" class="glass rounded-3xl overflow-hidden"></div>
+        </div>
+
+        <div id="results" class="section hidden">
+            <h2 class="title-font text-4xl font-bold mb-8">Barcha natijalar</h2>
+            <div id="resultsList" class="space-y-4"></div>
+        </div>
+    </div>
+
+    <script>
+        const demoStudents = [
+            {name:"Azizbek Rahmanov", kurs:"3-kurs", tests:5, avg:92},
+            {name:"Madina Karimova", kurs:"4-kurs", tests:8, avg:96},
+            {name:"Shoxrux Juraev", kurs:"2-kurs", tests:3, avg:81},
+            {name:"Sardor Alimov", kurs:"1-kurs", tests:4, avg:88}
+        ];
+
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(section).classList.remove('hidden');
+            if (section === 'students') renderStudents();
+            if (section === 'results') renderResults();
+        }
+
+        function renderStudents() {
+            let html = `<table class="w-full"><thead class="bg-slate-800"><tr><th class="px-8 py-5 text-left">Ism</th><th class="px-8 py-5 text-left">Kurs</th><th class="px-8 py-5 text-center">Testlar</th><th class="px-8 py-5 text-center">O‘rtacha ball</th></tr></thead><tbody>`;
+            demoStudents.forEach(s => {
+                html += `<tr class="border-b border-slate-700"><td class="px-8 py-6">${s.name}</td><td class="px-8 py-6">${s.kurs}</td><td class="px-8 py-6 text-center">${s.tests}</td><td class="px-8 py-6 text-center font-bold text-cyan-400">${s.avg}%</td></tr>`;
+            });
+            html += `</tbody></table>`;
+            document.getElementById('studentsTable').innerHTML = html;
+        }
+
+        function renderResults() {
+            let html = `<div class="space-y-4">`;
+            demoStudents.forEach(s => {
+                html += `<div class="glass rounded-3xl p-8 flex justify-between items-center"><div><div class="font-semibold">${s.name}</div><div class="text-sm text-slate-400">${s.kurs}</div></div><div class="text-right"><div class="text-4xl font-bold text-cyan-400">${s.avg}%</div><div class="text-sm">${s.tests} ta test</div></div></div>`;
+            });
+            html += `</div>`;
+            document.getElementById('resultsList').innerHTML = html;
+        }
+
+        function logout() {
+            if (confirm("Chiqishni xohlaysizmi?")) {
+                localStorage.removeItem('instsu_current_user');
+                window.location.href = "login.html";
+            }
+        }
+
+        window.onload = () => {
+            const user = JSON.parse(localStorage.getItem('instsu_current_user'));
+            if (!user || user.role !== "admin") {
+                alert("Bu sahifaga faqat admin kirishi mumkin!");
+                window.location.href = "login.html";
+            }
+        };
+    </script>
+</body>
+</html>
