@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INSTSU • Kirish / Ro‘yxatdan o‘tish</title>
+    <title>INSTSU • Kirish</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -18,84 +18,51 @@
             <div class="w-20 h-20 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-3xl flex items-center justify-center text-5xl shadow-2xl">📘</div>
         </div>
         <h1 class="text-4xl font-bold text-center mb-2">INSTSU</h1>
-        <p class="text-center text-slate-400 mb-8" id="formTitle">Kirish</p>
+        <p class="text-center text-slate-400 mb-10">Smart Campus Login</p>
 
         <div class="space-y-6">
-            <input id="fullName" type="text" placeholder="To‘liq ism (faqat ro‘yxatdan o‘tishda)" 
-                   class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-6 py-4 outline-none hidden">
-            
             <input id="username" type="text" placeholder="Foydalanuvchi nomi" 
                    class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-6 py-4 outline-none text-lg">
-            
             <input id="password" type="password" placeholder="Parol" 
                    class="w-full bg-slate-800 border border-slate-600 focus:border-cyan-400 rounded-2xl px-6 py-4 outline-none text-lg">
-
-            <button onclick="submitForm()" id="submitBtn"
+            
+            <button onclick="login()" 
                     class="w-full bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 font-bold py-5 rounded-3xl text-xl transition-all hover:scale-105">
                 Kirish
             </button>
         </div>
 
-        <div class="flex justify-between mt-8 text-sm">
-            <span onclick="toggleForm()" id="toggleText" class="text-cyan-400 cursor-pointer hover:underline">Ro‘yxatdan o‘tish</span>
-            <span onclick="fillDemo()" class="text-slate-400 cursor-pointer hover:text-white">Demo hisoblar</span>
-        </div>
+        <p class="text-center text-xs text-slate-500 mt-10">
+            Demo:<br>
+            Admin → <span class="text-cyan-400">admin</span> / <span class="text-cyan-400">admin123</span><br>
+            Talaba → <span class="text-cyan-400">azizbek</span> / <span class="text-cyan-400">123456</span>
+        </p>
     </div>
 
     <script>
-        let isLogin = true;
-
-        function toggleForm() {
-            isLogin = !isLogin;
-            document.getElementById('formTitle').textContent = isLogin ? "Kirish" : "Ro‘yxatdan o‘tish";
-            document.getElementById('fullName').classList.toggle('hidden', isLogin);
-            document.getElementById('toggleText').textContent = isLogin ? "Ro‘yxatdan o‘tish" : "Kirish";
-            document.getElementById('submitBtn').textContent = isLogin ? "Kirish" : "Ro‘yxatdan o‘tish";
-        }
-
-        function submitForm() {
+        function login() {
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
-            const fullName = document.getElementById('fullName').value.trim();
 
-            if (!username || !password) {
-                alert("Login va parolni to‘ldiring!");
-                return;
-            }
-
-            if (!isLogin && !fullName) {
-                alert("To‘liq ismni kiriting!");
-                return;
-            }
-
-            if (isLogin) {
-                // Login
-                if (username === "admin" && password === "admin123") {
-                    localStorage.setItem('instsu_current_user', JSON.stringify({ role: "admin", fullName: "Admin", username: "admin" }));
-                    window.location.href = "admin.html";
-                } else if (username === "azizbek" && password === "123456") {
-                    localStorage.setItem('instsu_current_user', JSON.stringify({ role: "student", fullName: "Azizbek Rahmanov", username: "azizbek", kurs: "3-kurs" }));
-                    window.location.href = "index.html";
-                } else {
-                    alert("❌ Noto‘g‘ri login yoki parol!");
-                }
-            } else {
-                // Ro‘yxatdan o‘tish (demo)
-                alert(`✅ Ro‘yxatdan o‘tish muvaffaqiyatli!\nIsm: ${fullName}\nLogin: ${username}`);
-                // Keyin login qilish uchun avtomatik to‘ldirish
-                document.getElementById('username').value = username;
-                document.getElementById('password').value = password;
-                toggleForm();
-            }
-        }
-
-        function fillDemo() {
-            if (confirm("Admin hisobini to‘ldiraylikmi?")) {
-                document.getElementById('username').value = "admin";
-                document.getElementById('password').value = "admin123";
-            } else {
-                document.getElementById('username').value = "azizbek";
-                document.getElementById('password').value = "123456";
+            if (username === "admin" && password === "admin123") {
+                localStorage.setItem('instsu_current_user', JSON.stringify({ 
+                    role: "admin", 
+                    fullName: "Admin", 
+                    username: "admin" 
+                }));
+                window.location.href = "admin.html";
+            } 
+            else if (username === "azizbek" && password === "123456") {
+                localStorage.setItem('instsu_current_user', JSON.stringify({ 
+                    role: "student", 
+                    fullName: "Azizbek Rahmanov", 
+                    username: "azizbek", 
+                    kurs: "3-kurs" 
+                }));
+                window.location.href = "index.html";
+            } 
+            else {
+                alert("❌ Noto‘g‘ri login yoki parol!");
             }
         }
     </script>
