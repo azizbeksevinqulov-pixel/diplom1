@@ -1,37 +1,99 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <title>Talaba Asosiy Sahifa</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTSU • Smart Campus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        * { font-family: 'Inter', system_ui, sans-serif; }
+        .title-font { font-family: 'Space Grotesk', sans-serif; }
+        .glass { background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(32px); border: 1px solid rgba(103, 232, 249, 0.3); }
+    </style>
 </head>
-<body class="bg-gradient-to-r from-gray-900 via-indigo-900 to-purple-900 min-h-screen text-white font-[Space Grotesk]">
-  <div class="p-10">
-    <h1 id="greeting" class="text-4xl mb-8"></h1>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl hover:scale-105 transition">
-        <h2 class="text-xl mb-4">Axborot xavfsizligi</h2>
-        <p>Axborot tizimlari xavfsizligi bo‘yicha bilimlar.</p>
-      </div>
-      <div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl hover:scale-105 transition">
-        <h2 class="text-xl mb-4">Big Data</h2>
-        <p>Katta ma’lumotlar tahlili va ishlov berish.</p>
-      </div>
-      <div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl hover:scale-105 transition">
-        <h2 class="text-xl mb-4">Xorijiy til</h2>
-        <p>Ingliz tili bilimlarini mustahkamlash.</p>
-      </div>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-black text-slate-200 min-h-screen">
+
+    <nav class="bg-slate-900/95 border-b border-slate-700/50 sticky top-0 z-50 backdrop-blur-2xl">
+        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center text-4xl shadow-2xl">📘</div>
+                <div class="title-font text-4xl font-bold tracking-tighter">INSTSU</div>
+            </div>
+            <div class="flex items-center gap-6">
+                <div onclick="showProfile()" class="flex items-center gap-4 cursor-pointer">
+                    <div id="userAvatar" class="w-11 h-11 bg-gradient-to-br from-cyan-400 to-violet-500 text-slate-900 rounded-3xl flex items-center justify-center font-bold text-2xl"></div>
+                    <div class="hidden sm:block">
+                        <div id="displayName" class="font-semibold"></div>
+                        <div id="displayKurs" class="text-xs text-cyan-300"></div>
+                    </div>
+                </div>
+                <button onclick="logout()" class="px-6 py-3 bg-red-500/10 hover:bg-red-500 hover:text-white rounded-3xl flex items-center gap-3 text-sm font-medium transition-all">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Chiqish
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-16">
+        <div class="glass rounded-3xl p-20 text-center">
+            <h1 class="title-font text-7xl font-bold tracking-tighter leading-none mb-6">
+                Salom, <span id="welcomeName" class="bg-gradient-to-r from-cyan-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent"></span>!
+            </h1>
+            <p class="text-2xl text-slate-300 max-w-2xl mx-auto">
+                Institut talabalari uchun zamonaviy o‘quv va imtihon platformasi
+            </p>
+            <button onclick="goToSavollar()" 
+                    class="mt-12 bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-500 text-slate-950 font-bold text-2xl px-20 py-8 rounded-3xl hover:scale-110 transition-all shadow-2xl flex items-center gap-4 mx-auto">
+                <i class="fa-solid fa-graduation-cap"></i>
+                Imtihon bo‘limiga o‘tish
+            </button>
+        </div>
+
+        <div class="mt-20">
+            <h2 class="title-font text-4xl font-bold mb-10 text-center">Asosiy bo‘limlar</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass rounded-3xl p-10 card-hover text-center">
+                    <div class="text-6xl mb-6">🔐</div>
+                    <h3 class="text-2xl font-semibold mb-3">Axborot xavfsizligi</h3>
+                    <p class="text-slate-400">Ma’lumotlar xavfsizligi va himoya usullari</p>
+                </div>
+                <div class="glass rounded-3xl p-10 card-hover text-center">
+                    <div class="text-6xl mb-6">📊</div>
+                    <h3 class="text-2xl font-semibold mb-3">Big Data</h3>
+                    <p class="text-slate-400">Katta hajmdagi ma’lumotlar bilan ishlash</p>
+                </div>
+                <div class="glass rounded-3xl p-10 card-hover text-center">
+                    <div class="text-6xl mb-6">🌍</div>
+                    <h3 class="text-2xl font-semibold mb-3">Xorijiy til</h3>
+                    <p class="text-slate-400">IT sohasidagi ingliz tili va texnik atamalar</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <button onclick="goExam()" class="mt-10 bg-gradient-to-r from-cyan-500 to-purple-600 py-3 px-6 rounded-lg hover:scale-105 transition">Imtihon bo‘limiga o‘tish</button>
-  </div>
 
-  <script>
-    const name = localStorage.getItem("name");
-    document.getElementById("greeting").innerText = "Salom, " + name + "!";
+    <script>
+        let currentUser = null;
+        window.onload = () => {
+            const saved = localStorage.getItem('instsu_current_user');
+            if (!saved) return window.location.href = "login.html";
+            currentUser = JSON.parse(saved);
+            document.getElementById('displayName').textContent = currentUser.fullName || currentUser.username;
+            document.getElementById('displayKurs').textContent = currentUser.kurs || "2-kurs";
+            document.getElementById('welcomeName').textContent = (currentUser.fullName || currentUser.username).split(' ')[0];
+        };
 
-    function goExam() {
-      window.location.href = "savollar.html";
-    }
-  </script>
+        function goToSavollar() { window.location.href = "savollar.html"; }
+        function showProfile() {
+            alert(`Talaba: ${currentUser ? currentUser.fullName : 'Foydalanuvchi'}\nKurs: ${currentUser ? currentUser.kurs : '2-kurs'}`);
+        }
+        function logout() {
+            if (confirm("Chiqishni xohlaysizmi?")) {
+                localStorage.removeItem('instsu_current_user');
+                window.location.href = "login.html";
+            }
+        }
+    </script>
 </body>
 </html>
