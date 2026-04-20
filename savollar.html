@@ -1,99 +1,179 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <title>Imtihon Savollari</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTSU • Imtihon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        * { font-family: 'Inter', system_ui, sans-serif; }
+        .title-font { font-family: 'Space Grotesk', sans-serif; }
+        .glass { background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(28px); border: 1px solid rgba(103, 232, 249, 0.25); }
+        .option { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .option:hover { transform: translateX(15px); background-color: rgba(103, 232, 249, 0.18); }
+        .option.selected { background-color: rgba(103, 232, 249, 0.3); border-color: #67e8f9; transform: scale(1.03); }
+    </style>
 </head>
-<body class="bg-gradient-to-r from-gray-900 via-purple-900 to-indigo-900 min-h-screen text-white font-[Space Grotesk]">
-  <div class="p-10">
-    <h1 class="text-3xl mb-6">Imtihon</h1>
-    <div id="subjectSelect" class="grid md:grid-cols-3 gap-6">
-      <div onclick="startExam('Axborot xavfsizligi')" class="cursor-pointer bg-white/10 p-6 rounded-xl hover:scale-105 transition">Axborot xavfsizligi</div>
-      <div onclick="startExam('Big Data')" class="cursor-pointer bg-white/10 p-6 rounded-xl hover:scale-105 transition">Big Data</div>
-      <div onclick="startExam('Xorijiy til')" class="cursor-pointer bg-white/10 p-6 rounded-xl hover:scale-105 transition">Xorijiy til</div>
-    </div>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-black text-slate-200 min-h-screen">
 
-    <div id="examArea" class="hidden">
-      <div class="flex justify-between mb-4">
-        <div id="timer">20:00</div>
-        <div class="w-1/2 bg-gray-700 rounded-full">
-          <div id="progress" class="bg-cyan-500 h-3 rounded-full" style="width:0%"></div>
+    <div class="max-w-4xl mx-auto px-6 py-10">
+
+        <div class="flex justify-between items-center mb-10">
+            <button onclick="window.location.href='index.html'" class="flex items-center gap-3 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-arrow-left text-2xl"></i>
+                <span class="font-medium">Asosiy sahifaga</span>
+            </button>
+            <div class="title-font text-3xl font-bold text-cyan-400">Imtihon</div>
         </div>
-      </div>
-      <div id="questionBox" class="bg-white/10 p-6 rounded-xl"></div>
+
+        <div class="glass rounded-3xl p-10 mb-10">
+            <h2 id="quizSubjectName" class="title-font text-4xl font-semibold text-center mb-8">Axborot xavfsizligi</h2>
+            
+            <div class="flex justify-between items-center mb-8">
+                <div class="bg-slate-900 px-6 py-3 rounded-3xl">
+                    <span id="timer" class="font-mono text-3xl font-bold text-cyan-400">20:00</span>
+                </div>
+                <div class="text-2xl">
+                    <span id="currentQuestion" class="text-cyan-400 font-bold">1</span> / 20
+                </div>
+            </div>
+
+            <div class="h-3 bg-slate-800 rounded-full mb-12 overflow-hidden">
+                <div id="progressBar" class="h-3 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full transition-all" style="width:0%"></div>
+            </div>
+
+            <div id="questionText" class="text-3xl font-medium mb-14"></div>
+
+            <div id="optionsContainer" class="space-y-6"></div>
+
+            <div class="flex justify-between mt-16">
+                <button onclick="prevQuestion()" id="prevBtn" class="px-12 py-6 border border-slate-600 hover:border-cyan-400 rounded-3xl font-medium text-lg">◀ Oldingi</button>
+                <button onclick="nextQuestion()" id="nextBtn" class="px-16 py-6 bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 font-semibold rounded-3xl text-lg">Keyingi ▶</button>
+            </div>
+        </div>
     </div>
 
-    <div id="resultArea" class="hidden text-center">
-      <h2 class="text-3xl mb-4">Natija</h2>
-      <p id="score"></p>
-    </div>
-  </div>
+    <script>
+        const questions = [
+            {q: "Axborot xavfsizligining uchta asosiy tamoyili nima?", options: ["CIA triad", "AAA model", "OSI model", "TCP/IP"], answer: 0},
+            {q: "Phishing hujumi nima?", options: ["Foydalanuvchini aldab ma'lumot olish", "Tarmoq tezligini oshirish", "Faylni shifrlash", "Backup qilish"], answer: 0},
+            {q: "Firewall nima vazifani bajaradi?", options: ["Tashqi hujumlardan himoya", "Ma'lumotni tez uzatish", "Viruslarni o‘chirish", "Parolni saqlash"], answer: 0},
+            {q: "SSL/TLS protokoli nima uchun kerak?", options: ["Ma'lumotni shifrlash", "Tezlikni oshirish", "Fayl yuklab olish", "Viruslarni aniqlash"], answer: 0},
+            {q: "DDoS hujumi nima?", options: ["Serverni ortiqcha yuklab ishdan chiqarish", "Parolni buzish", "Ma'lumot o‘g‘irlash", "Faylni ochish"], answer: 0},
+            {q: "Zero-day vulnerability nima?", options: ["Hali tuzatilmagan yangi zaiflik", "Eski virus", "Parol buzish", "Tarmoq uzilishi"], answer: 0},
+            {q: "Multi-factor authentication nima?", options: ["Bir necha usul bilan tasdiqlash", "Faqat parol", "Faqat barmoq izi", "Faqat SMS"], answer: 0},
+            {q: "Ransomware nima qiladi?", options: ["Fayllarni shifrlab pul talab qiladi", "Tarmoqni sekinlashtiradi", "Ma'lumotni o‘chiradi", "Parolni o‘zgartiradi"], answer: 0},
+            {q: "SQL Injection nima?", options: ["Ma'lumotlar bazasiga zarar yetkazish", "Tarmoq hujumi", "Fayl yuklash", "Email spam"], answer: 0},
+            {q: "VPN nima uchun ishlatiladi?", options: ["Xavfsiz aloqa", "Tezlik oshirish", "Fayl saqlash", "Virus o‘chirish"], answer: 0},
+            {q: "Brute force attack nima?", options: ["Parolni kuch bilan sinash", "Phishing", "Malware", "DDoS"], answer: 0},
+            {q: "Encryption nima?", options: ["Ma'lumotni shifrlash", "Ma'lumotni ochish", "Ma'lumotni saqlash", "Ma'lumotni o‘chirish"], answer: 0},
+            {q: "GDPR nima?", options: ["Yevropa ma'lumotlar himoyasi qonuni", "Amerika qonuni", "O‘zbekiston qonuni", "Xitoy qonuni"], answer: 0},
+            {q: "Antivirus dasturi nima qiladi?", options: ["Viruslarni aniqlaydi va bloklaydi", "Internet tezligini oshiradi", "Fayllarni siqadi", "Parolni saqlaydi"], answer: 0},
+            {q: "Man-in-the-middle attack nima?", options: ["Aloqani tinglash", "Serverni buzish", "Fayl o‘g‘irlash", "Email yuborish"], answer: 0},
+            {q: "Password manager nima uchun foydali?", options: ["Kuchli parollarni saqlash", "Parolni osonlashtirish", "Internetni tezlashtirish", "Virus o‘chirish"], answer: 0},
+            {q: "Patch management nima?", options: ["Dasturlarni yangilash", "Faylni o‘chirish", "Parolni o‘zgartirish", "Tarmoqni uzish"], answer: 0},
+            {q: "Social engineering nima?", options: ["Insonni aldab ma'lumot olish", "Dasturiy hujum", "Tarmoq hujumi", "Fizik hujum"], answer: 0},
+            {q: "Backup nima uchun muhim?", options: ["Ma'lumotni yo‘qotmaslik uchun", "Tezlik oshirish uchun", "Virus o‘chirish uchun", "Parolni saqlash uchun"], answer: 0},
+            {q: "Least privilege principle nima?", options: ["Faqat kerakli huquq berish", "Barchaga to‘liq huquq", "Hech kimga huquq bermaslik", "Faqat adminlarga"], answer: 0}
+        ];
 
-  <script>
-    let questions = [];
-    let current = 0;
-    let correct = 0;
-    let timer;
-    let timeLeft = 1200; // 20 min
+        let currentQuestionIndex = 0;
+        let currentAnswers = [];
+        let timerInterval = null;
+        let timeLeft = 1200;
 
-    function startExam(subject) {
-      document.getElementById("subjectSelect").classList.add("hidden");
-      document.getElementById("examArea").classList.remove("hidden");
-      generateQuestions(subject);
-      showQuestion();
-      startTimer();
-    }
+        function renderCurrentQuestion() {
+            const q = questions[currentQuestionIndex];
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('questionText').textContent = q.q;
 
-    function generateQuestions(subject) {
-      questions = [];
-      for (let i=1; i<=20; i++) {
-        questions.push({
-          q: subject + " savol " + i,
-          options: ["Variant A","Variant B","Variant C","Variant D"],
-          answer: 0
-        });
-      }
-    }
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = q.options.map((opt, i) => `
+                <div onclick="selectAnswer(${i})" class="option glass border border-slate-600 p-8 rounded-3xl cursor-pointer text-xl flex items-start gap-6" id="option-${i}">
+                    <span class="font-bold text-cyan-400 w-8">${String.fromCharCode(65 + i)}</span>
+                    <span>${opt}</span>
+                </div>
+            `).join('');
+        }
 
-    function showQuestion() {
-      if (current >= questions.length) {
-        finishExam();
-        return;
-      }
-      const q = questions[current];
-      let html = `<h3 class="text-xl mb-4">${q.q}</h3>`;
-      q.options.forEach((opt,i)=>{
-        html += `<div onclick="choose(${i})" class="cursor-pointer bg-white/20 p-3 rounded-lg mb-2 hover:bg-cyan-600 transition">${opt}</div>`;
-      });
-      document.getElementById("questionBox").innerHTML = html;
-      document.getElementById("progress").style.width = ((current/questions.length)*100)+"%";
-    }
+        function selectAnswer(selectedIndex) {
+            currentAnswers[currentQuestionIndex] = selectedIndex;
 
-    function choose(i) {
-      if (i===questions[current].answer) correct++;
-      current++;
-      setTimeout(showQuestion,900);
-    }
+            for (let i = 0; i < 4; i++) {
+                const opt = document.getElementById(`option-${i}`);
+                if (opt) opt.classList.toggle('selected', i === selectedIndex);
+            }
 
-    function finishExam() {
-      document.getElementById("examArea").classList.add("hidden");
-      document.getElementById("resultArea").classList.remove("hidden");
-      const percent = Math.round((correct/questions.length)*100);
-      const grade = percent>=90?"A":percent>=75?"B":percent>=60?"C":"F";
-      document.getElementById("score").innerText = `Foiz: ${percent}% | Baho: ${grade}`;
-      localStorage.setItem("lastResult", percent);
-    }
+            setTimeout(() => {
+                if (currentQuestionIndex < 19) {
+                    currentQuestionIndex++;
+                    renderCurrentQuestion();
+                } else {
+                    finishTest();
+                }
+            }, 900);
+        }
 
-    function startTimer() {
-      timer = setInterval(()=>{
-        timeLeft--;
-        let min = Math.floor(timeLeft/60);
-        let sec = timeLeft%60;
-        document.getElementById("timer").innerText = `${min}:${sec<10?"0":""}${sec}`;
-        if (timeLeft<=0) finishExam();
-      },1000);
-    }
-  </script>
+        function nextQuestion() {
+            if (currentQuestionIndex < 19) {
+                currentQuestionIndex++;
+                renderCurrentQuestion();
+            } else finishTest();
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderCurrentQuestion();
+            }
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const min = Math.floor(timeLeft / 60);
+                const sec = timeLeft % 60;
+                document.getElementById('timer').textContent = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+                if (timeLeft <= 0) finishTest();
+            }, 1000);
+        }
+
+        function finishTest() {
+            clearInterval(timerInterval);
+            let correct = 0;
+            questions.forEach((q, i) => {
+                if (currentAnswers[i] === q.answer) correct++;
+            });
+            const percent = Math.round((correct / 20) * 100);
+
+            // Natijani saqlash
+            const result = {
+                date: new Date().toLocaleString('uz-UZ'),
+                score: correct,
+                percent: percent,
+                total: 20
+            };
+
+            let history = JSON.parse(localStorage.getItem('testHistory') || '[]');
+            history.unshift(result);
+            localStorage.setItem('testHistory', JSON.stringify(history));
+
+            document.getElementById('scoreCircle').innerHTML = `<span class="text-cyan-400">${percent}</span><span class="text-4xl text-slate-400">%</span>`;
+            document.getElementById('resultTitle').textContent = percent >= 85 ? "Ajoyib natija! 🎉" : percent >= 70 ? "Yaxshi natija!" : "Yana urinib ko‘ring";
+            document.getElementById('resultSubtitle').innerHTML = `Axborot xavfsizligi<br><span class="text-2xl">${correct} / 20 ball</span>`;
+
+            // Natija sahifasini ko‘rsatish (oddiy alert bilan)
+            alert(`Test yakunlandi!\nBall: ${correct}/20 (${percent}%)`);
+            window.location.href = "index.html";
+        }
+
+        window.onload = () => {
+            renderCurrentQuestion();
+            startTimer();
+        };
+    </script>
 </body>
 </html>
